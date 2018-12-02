@@ -7,7 +7,7 @@
 
 /* Basic labels */
 h1 {
-    font-size: 34px;
+    font-size: 34px; /* FIXME lo ideal es usar tamaños relativos con em o rem y asi tomara el calculo con el tamaño definido al body */
 }
 
 h2 {
