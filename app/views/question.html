@@ -6,66 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Trivia Crack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- build:css -->
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/library.css">
     <link rel="stylesheet" href="../css/grid.css">
     <link rel="stylesheet" href="../css/buttons.css">
     <link rel="stylesheet" href="../css/questions.css">
+    <!-- endbuild -->
     <link rel="shortcut icon" href="../favicon.ico">
+    <!-- build:js -->
+    <script src="../js/principal.js"></script>
+    <!-- endbuild -->
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="">
-                <img src="../img/logo.png" class="logo-item">
-            </a>
-            <div class="drop-opts">
-                <i id="drop-menu" class="fa fa-bars"></i>
-            </div>
-        </div>
-        <nav>
-            <ul id="menu" class="nav-menu hide">
-                <li class="menu-item"><a href="">How to play</a></li>
-                <li class="menu-item"><a href="">Support</a></li>
-                <li class="menu-item"><a href="">Log-in/Sing-in</a></li>
-                <li class="drop-item menu-item">
-                    <a href="">Nickname <i class="fa fa-caret-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="sub-item"><a href="">Settings</a></li>
-                        <li class="sub-item"><a href="">Play</a></li>
-                        <li class="sub-item"><a href="">Add Question</a></li>
-                        <li class="sub-item"><a href="">Log-out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <script src="../js/menu.js"></script>
-    </header>
+    {{>menu}}
     <main>
-        <section class="base-container">
+        <section class="base-container col-10">
             <div class="multiple-container">
                 <div class="col-12">
                     <div class="multiple-container tlt-cat">
-                        <img src="https://vignette.wikia.nocookie.net/es.pokemon/images/2/2c/Pok%C3%A9mon_Jukebox_icono.png/revision/latest?cb=20150624132304"
-                            class="col-1 img-cat">
+                        <img src="{{{img}}}" class="col-1 img-cat">
                         <div class="col-11">
-                            <h1>Category</h1>
+                            <h1>{{category}}</h1>
                         </div>
                     </div>
                     <div class="question">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel consequuntur quibusdam et animi
-                            laboriosam dolore adipisci vero facilis quos quis, sint quam, mollitia fugit fuga veniam
-                            nam esse, quas architecto.</p>
+                        <p>{{question}}</p>
                         <form action="">
                             <button class="btn-option">
-                                Python
+                                {{opc1}}
                             </button>
                             <button class="btn-option">
-                                Java
+                                {{opc2}}
                             </button>
                             <button class="btn-option">
-                                C++
+                                {{opc3}}
                             </button>
                         </form>
                     </div>
@@ -73,14 +49,7 @@
             </div>
         </section>
     </main>
-    <footer>
-        <nav>
-            <ul class="nav-sub-menu">
-                <li class="menu-item"><a href="">Facebook</a></li>
-                <li class="menu-item"><a href="">Github</a></li>
-            </ul>
-        </nav>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>

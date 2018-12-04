@@ -12,6 +12,7 @@ const uglify = require('gulp-uglify');
 const gulpSequence = require('gulp-sequence');
 const htmlreplace = require('gulp-html-replace');
 const ext_replace = require('gulp-ext-replace');
+const pump = require('pump')
 
 gulp.task('clean', function () {
     return gulp.src('./public/*')
@@ -31,11 +32,16 @@ gulp.task('build-css', function () {
 });
 
 gulp.task('build-js', function () {
-    gulp.src('./app/js/**/*.js')
-        .pipe(concat('index.js'))
-        .pipe(babel({ presets: ['@babel/env'] }))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'));
+    pump(
+        gulp.src('./app/js/**/*.js'),
+        concat('index.js'),
+        babel({ presets: ['@babel/env'] }),
+        uglify(),
+        gulp.dest('./public/js'),
+        function (err) {
+            console.log(err);
+        }
+    )
 });
 
 gulp.task('mv-img', function () {
@@ -48,7 +54,7 @@ gulp.task('build-html', function () {
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(htmlreplace({
             css: './css/styles.css',
-            js: './js/index.css',
+            js: './js/index.js',
         }, {
                 resolvePaths: true,
             }))

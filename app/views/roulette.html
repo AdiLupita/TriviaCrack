@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Category selection</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- build:css -->
   <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/library.css">
   <link rel="stylesheet" href="../css/main.css">
@@ -14,42 +15,20 @@
   <link rel="stylesheet" href="../css/inputs.css">
   <link rel="stylesheet" href="../css/animations.css">
   <link rel="stylesheet" href="../css/roulette.css">
+  <!-- endbuild -->
   <link rel="shortcut icon" href="../favicon.ico">
+  <!-- build:js -->
+  <script src="../js/principal.js"></script>
+  <!-- endbuild -->
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <a href="">
-        <img src="../img/logo.png" class="logo-item">
-      </a>
-      <div class="drop-opts">
-        <i id="drop-menu" class="fa fa-bars"></i>
-      </div>
-    </div>
-    <nav>
-      <ul id="menu" class="nav-menu hide">
-        <li class="menu-item"><a href="">How to play</a></li>
-        <li class="menu-item"><a href="">Support</a></li>
-        <li class="menu-item"><a href="">Log-in/Sing-in</a></li>
-        <li class="drop-item menu-item">
-          <a href="">Nickname <i class="fa fa-caret-down"></i></a>
-          <ul class="nav-sub">
-            <li class="sub-item"><a href="">Settings</a></li>
-            <li class="sub-item"><a href="">Play</a></li>
-            <li class="sub-item"><a href="">Add Question</a></li>
-            <li class="sub-item"><a href="">Log-out</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <script src="../js/menu.js"></script>
-  </header>
+  {{>menu}}
   <main>
     <div class="base-container col-10">
       <div class="centered-container col-6">
-        <div class="">
-          <h1 class="login-text">Next category</h1>
+        <div class="tlt-center">
+          <h1>Next category</h1>
         </div>
         <div class="roulette-container">
           <div class="col-4 centered-container">
@@ -62,14 +41,7 @@
       </div>
     </div>
   </main>
-  <footer>
-    <nav>
-      <ul class="nav-sub-menu">
-        <li class="menu-item"><a href="">Facebook</a></li>
-        <li class="menu-item"><a href="">Github</a></li>
-      </ul>
-    </nav>
-  </footer>
+  {{>footer}}
 </body>
 
 </html>

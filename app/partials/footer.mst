@@ -1,9 +1,0 @@
-<footer>
-    <nav>
-      <ul class="nav-sub-menu">
-        <li class="menu-item"><a href="">Contact us</a></li>
-        <li class="menu-item"><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
-        <li class="menu-item"><a href="https://github.com/" target="_blank">Github</a></li>
-      </ul>
-    </nav>
-  </footer>

@@ -4,11 +4,13 @@
 }
 
 .div-field{
-    padding: 5px 0;
+    margin: 5px 0;
+    padding: 5px 3px;
+    display: block;
 }
 
 .cont-data {
-    margin: 15px 0px;
+    padding: 15px 0px;
 }
 
 .info {
@@ -40,7 +42,8 @@
 }
 
 .tlt-friend{
-    font-size: 30px;
+    text-align: center;
+    margin: 15px 5px;
 }
 
 .form-add-friend {
@@ -49,9 +52,17 @@
     float: right;
 }
 
+.email-list {
+    display: flex;
+}
+
+.email-list > * {
+    margin: 3px;
+}
+
 .list-friends {
     background: var(--sub-cont-color);
-    border: 1px solid var(--highlight-color);
+    box-shadow: 1px 2px var(--highlight-color);
     padding: 5px 10px;
 }
 
@@ -62,7 +73,7 @@
 
 .friend {
     background: var(--cont-color);
-    border: 1px solid #000000;
+    box-shadow: 1px 2px var(--highlight-color);
     padding: 4px 8px;
     margin: 10px 15px;
     display: flex;
@@ -96,7 +107,7 @@
 }
 
 .tlt-center {
-    font-size: 34px;
+    /* font-size: 34px; */
     text-align: center;
     margin: 10px 0;
 }

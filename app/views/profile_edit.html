@@ -6,70 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Trivia Crack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- build:css -->
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/library.css">
     <link rel="stylesheet" href="../css/grid.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../css/buttons.css">
     <link rel="stylesheet" href="../css/inputs.css">
+    <!-- endbuild -->
     <link rel="shortcut icon" href="../favicon.ico">
+    <!-- build:js -->
+    <script src="../js/menu.js"></script>
+    <!-- endbuild -->
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="">
-                <img src="../img/logo.png" class="logo-item">
-            </a>
-            <div class="drop-opts">
-                <i id="drop-menu" class="fa fa-bars"></i>
-            </div>
-        </div>
-        <nav>
-            <ul id="menu" class="nav-menu hide">
-                <li class="menu-item"><a href="">How to play</a></li>
-                <li class="menu-item"><a href="">Support</a></li>
-                <li class="menu-item"><a href="">Log-in/Sing-in</a></li>
-                <li class="drop-item menu-item">
-                    <a href="">Nickname <i class="fa fa-caret-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="sub-item"><a href="">Settings</a></li>
-                        <li class="sub-item"><a href="">Play</a></li>
-                        <li class="sub-item"><a href="">Add Question</a></li>
-                        <li class="sub-item"><a href="">Log-out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <script src="../js/menu.js"></script>
-    </header>
+    {{>menu}}
     <main>
-        <section class="base-container">
+        <section class="base-container col-10">
             <div class="multiple-container">
                 <div class="col-2 div-img">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Antu_im-invisible-user.svg/512px-Antu_im-invisible-user.svg.png"
                         class="user-img">
                 </div>
                 <div class="col-10">
-                    <h1>Nickname</h1>
+                    <h1>{{nickname}}</h1>
                     <form action="" class="col-12">
-                        <div class="multiple-container div-field">
-                            <label for="" class="col-1">Nickname</label>
-                            <input type="text" class="col-11 txt-input" placeholder="Write a new Nickname">
-                        </div>
-                        <div class="multiple-container div-field">
+                        <div class="div-field">
                             <label for="" class="col-1">Email</label>
-                            <input type="email" class="col-11 txt-input" placeholder="Write a new email">
+                            <input type="email" class="col-12 txt-input" placeholder="Write a new email" value="{{{email}}}">
                         </div>
-                        <div class="multiple-container div-field">
+                        <div class="div-field">
+                            <a href="/profile/add_emails" class="col-1 btn-a">Add email</a>
+                        </div>
+                        <div class="div-field">
                             <label for="" class="col-1">Password</label>
-                            <input type="password" class="col-11 txt-input" placeholder="Write a new Password">
+                            <input type="password" class="col-12 txt-input" placeholder="Write a new Password" value="{{{password}}}">
                         </div>
-                        <div class="multiple-container div-field">
+                        <div class="div-field">
                             <label for="" class="col-1">Avatar</label>
-                            <input type="file" name="" id="" class="col-11 btn-file">
+                            <input type="file" name="" id="" class="col-12 btn-file">
                         </div>
-                        <div class="multiple-container div-field">
+                        <div class="div-field">
                             <button type="submit" class="btn-submit">Update</button>
                         </div>
                     </form>
@@ -77,14 +55,7 @@
             </div>
         </section>
     </main>
-    <footer>
-        <nav>
-            <ul class="nav-sub-menu">
-                <li class="menu-item"><a href="">Contact us</a></li>
-                <li class="menu-item"><a href="">Github</a></li>
-            </ul>
-        </nav>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>
