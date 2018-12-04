@@ -149,6 +149,20 @@ class User {
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const data = {
             nickname: req.cookies.nickname,
+            email: 'asas@gmail.com',
+            score: 123456789,
+            personal: true,
+            emails: [
+                {
+                    email: 'Asasdas_asdad',
+                },
+                {
+                    email: 'Asasdas_asdad',
+                },
+                {
+                    email: 'Asasdas_asdad',
+                }
+            ]
         };
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
         res.send(html);
