@@ -6,80 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Trivia Crack</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/normalize.css">
-    <link rel="stylesheet" href="../../css/library.css">
-    <link rel="stylesheet" href="../../css/grid.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="stylesheet" href="../../css/profile.css">
-    <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- build:css -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="../../css/normalize.css">
+      <link rel="stylesheet" href="../../css/library.css">
+      <link rel="stylesheet" href="../../css/grid.css">
+      <link rel="stylesheet" href="../../css/main.css">
+      <link rel="stylesheet" href="../../css/admin.css">
+      <link rel="stylesheet" href="../../css/profile.css">
+      <link rel="stylesheet" href="../../css/modal.css">
+      <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- endbuild -->
+    <!-- build:js -->
+      <script src="../../js/menu-admin.js"></script>
+      <script src="../../js/principal"></script>
+    <!-- endbuild -->
 </head>
 
 <body>
-    <header>
-      <div class="logo">
-          <img src="../../img/logo.png" class="logo-item">
-          <div class="drop-opts">
-              <i id="drop-menu" class="fa fa-bars"></i>
+  {{>menu}}
+  <main>
+          <div class="container container-menu">
+            {{>menu_admin}}
           </div>
-      </div>
-      <nav>
-          <ul id="menu" class="nav-menu hide">
-              <li><a href="" class="menu-item">How to play</a></li>
-              <li><a href="" class="menu-item">Support</a></li>
-              <li><a href="" class="menu-item">Log-in/Sing-in</a></li>
-              <li class="drop-item">
-                  <a href="" class="menu-item">Nickname</a>
-                  <i class="fa fa-caret-down"></i>
-                  <ul class="nav-sub">
-                      <li><a href="" class="sub-item">Settings</a></li>
-                      <li><a href="" class="sub-item">Approved Question</a></li>
-                      <li><a href="" class="sub-item">Log-out</a></li>
-                  </ul>
-              </li>
-          </ul>
-      </nav>
-    </header>
-    <main>
-        <div class="container">
-            <div class="col-2 menu-admin">
-                <ul class="menu-admin col-12">
-                    <li><a href="../users/index.html">Users</a></li>
-                    <li><a href="../games/index.html">Games</a></li>
-                    <li><a href="../questions/index.html">Questions</a></li>
-                    <li><a href="../categories/index.html">Categories</a></li>
-                </ul>
-            </div>
-            <div class="col-1"></div>
-            <section class="col-8 container">
+            <section class="multiple-container container-admin col-11">
+              {{#data}}
                       <div class="box col-9 cont-info">
-                          <h1 class="tlt-nickname">Question?</h1>
-                          <p class="txt-email">Option correct: correct</p>
-                          <p class="txt-email">Option 1: option</p>
-                          <p class="txt-email">Option 2: option</p>
-                          <p class="txt-email">User created: nickname</p>
-                          <p class="txt-email">Created date: 2018-08-09</p>
-                          <p class="txt-email">Approved date: -</p>
+                          <h4 class="txt-nickname">{{question}}</h4>
+                          <p class="txt-email">Option correct: {{optioncorrect}}</p>
+                          <p class="txt-email">Option 1: {{option1}}</p>
+                          <p class="txt-email">Option 2: {{option2}}</p>
+                          <p class="txt-email">Category: {{category}}</p>
+                          <p class="txt-email">User created: {{user}}</p>
+                          <p class="txt-email">Created date: {{createdate}}</p>
+                          <p class="txt-email">Approved date: {{approveddate}}</p>
                       </div>
                       <div class="box col-3">
-                          <a href="" class="btn-a">
+                          <a href="#delete" class="btn-a">
                               <i class="material-icons">delete</i>
                           </a>
-                          <a href="edit.html" class="btn-a">
+                          <a href="/questions/edit/{{id}}" class="btn-a">
                               <i class="material-icons">create</i>
                           </a>
-                      </div>
+                      </div>                      
+              {{/data}}
             </section>
         </div>
+        {{>delete_modal}}
     </main>
-    <footer>
-        <nav>
-            <ul class="nav-sub-menu">
-                <li><a href="" class="menu-item">Contact us</a></li>
-                <li><a href="" class="menu-item">Github</a></li>
-            </ul>
-        </nav>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>

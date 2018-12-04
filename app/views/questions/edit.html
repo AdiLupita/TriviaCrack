@@ -6,87 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Trivia Crack</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/normalize.css">
-    <link rel="stylesheet" href="../../css/library.css">
-    <link rel="stylesheet" href="../../css/grid.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- build:css -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="../../css/normalize.css">
+      <link rel="stylesheet" href="../../css/library.css">
+      <link rel="stylesheet" href="../../css/grid.css">
+      <link rel="stylesheet" href="../../css/main.css">
+      <link rel="stylesheet" href="../../css/admin.css">
+      <link rel="stylesheet" href="../../css/profile.css">
+      <link rel="stylesheet" href="../../css/modal.css">
+      <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- endbuild -->
+    <!-- build:js -->
+      <script src="../../js/menu-admin.js"></script>
+      <script src="../../js/principal"></script>
+    <!-- endbuild -->
 </head>
 
 <body>
-    <header>
-      <div class="logo">
-          <img src="../../img/logo.png" class="logo-item">
-          <div class="drop-opts">
-              <i id="drop-menu" class="fa fa-bars"></i>
-          </div>
-      </div>
-      <nav>
-          <ul id="menu" class="nav-menu hide">
-              <li><a href="" class="menu-item">How to play</a></li>
-              <li><a href="" class="menu-item">Support</a></li>
-              <li><a href="" class="menu-item">Log-in/Sing-in</a></li>
-              <li class="drop-item">
-                  <a href="" class="menu-item">Nickname</a>
-                  <i class="fa fa-caret-down"></i>
-                  <ul class="nav-sub">
-                      <li><a href="" class="sub-item">Settings</a></li>
-                      <li><a href="" class="sub-item">Approved Question</a></li>
-                      <li><a href="" class="sub-item">Log-out</a></li>
-                  </ul>
-              </li>
-          </ul>
-      </nav>
-    </header>
+    {{>menu}}
     <main>
-        <div class="container">
-            <div class="col-2 menu-admin">
-                <ul class="menu-admin col-12">
-                    <li><a href="../users/index.html">Users</a></li>
-                    <li><a href="../games/index.html">Games</a></li>
-                    <li><a href="../questions/index.html">Questions</a></li>
-                    <li><a href="../categories/index.html">Categories</a></li>
-                </ul>
-            </div>
-            <div class="col-1"></div>
-            <section class="col-8 container">
-                <div class="col-12">
-                    <h1>Edit Question</h1>
-                    <hr/>
-                    <form class="form-admin"  action="show.html" method="post">
-                      <div class="input">
-                        <label>Question</label>
-                        <input type="text" name="name" value="" autofocus="1" placeholder="question">
-                      </div>
-                      <div class="input">
-                        <label>Category</label>
-                        <select>
-                          <option value="0">Select category:</option>
-                          <option value="1">Category 1</option>
-                          <option value="2">Category 2</option>
-                          <option value="3">Category 3</option>
-                        </select>
-                      </div>
-                      <div class="input">
-                        <label>Option 1</label>
-                        <input type="text" name="color" value="" autofocus="1" placeholder="option">
-                      </div>
-                      <div class="input">
-                        <label>Option 2</label>
-                        <input type="text" name="color" value="" autofocus="1" placeholder="option">
-                      </div>
-                      <div class="input">
-                        <label>Option correct</label>
-                        <input type="text" name="color" value="" autofocus="1" placeholder="option correct">
-                      </div>
-                      <div class="input">
-                        <button value="1" type="button" name="update" type="submit">Update</button>
-                      </div>
-                    </form>
-                </div>
-            </section>
-        </div>
+      <div class="container container-menu">
+        {{>menu_admin}}
+      </div>
+      {{#data}}
+      <section class="base-container">
+          <div class="multiple-container">
+              <form action="" class="col-12">
+                  <div class="multiple-container quest">
+                      <label class="col-1">Category</label>
+                      <select name="" id="" class="col-12">
+                          <option value="">Select a category</option>
+                          {{#categories}}
+                          <option value="{{{category}}}">{{category}}</option>
+                          {{/categories}}
+                      </select>
+                  </div>
+                  <div class="multiple-container quest">
+                      <label class="col-12">Question</label>
+                      <textarea name="" id="" cols="30" rows="5" class="col-12 txt-input"
+                      placeholder="Write your question.">{{question}}</textarea>
+                  </div>
+                  <div class="multiple-container quest">
+                      <label class="col-1">Option 1</label>
+                      <input type="text" name="" id="" placeholder="Write the first option"
+                      class="col-11 txt-input" value="{{option1}}">
+                  </div>
+                  <div class="multiple-container quest">
+                      <label class="col-1">Option 2</label>
+                      <input type="text" name="" id="" placeholder="Write the second option"
+                      class="col-11 txt-input" value="{{option2}}">
+                  </div>
+                  <div class="multiple-container quest">
+                      <label class="col-2">Option correct</label>
+                      <input type="text" name="" id="" placeholder="Write the correct option"
+                      class="col-10 txt-input" value="{{optioncorrect}}">
+                  </div>
+                  <div class="multiple-container">
+                      <button type="submit" class="btn-submit">Create</button>
+                  </div>
+              </form>
+          </div>
+      </section>
+      {{/data}}
     </main>
     <footer>
         <nav>
