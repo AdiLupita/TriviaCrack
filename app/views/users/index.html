@@ -23,18 +23,13 @@
     {{>menu}}
     <main>
         <div class="container">
-            {{>menuadmin}}
-            <div class="col-1"></div>
-            <section class="col-9 container">
+            <div class="container container-menu">
+            {{>menu_admin}}
+            </div>
+            <section class="col-11 container-admin ">
                 <h1>Users</h1>
                 <hr/>
-                <div>
-                    <a href="create.html" class="btn-add">
-                        <i class="material-icons">add</i>
-                        <label>user</label>
-                    </a>
-                </div>
-                <div class="col-12 datagrid">
+                <div class="datagrid">
                     <table>
                         <thead>
                             <tr>
@@ -48,83 +43,33 @@
                                 <td colspan="4">
                                     <div id="paging">
                                         <ul>
-                                            <li><a href="#"><span></span></a></li>
+                                            <li><a href="#"><span>&#60;&#60;</span></a></li>
                                             <li><a href="#" class="active"><span>1</span></a></li>
                                             <li><a href="#"><span>2</span></a></li>
                                             <li><a href="#"><span>3</span></a></li>
                                             <li><a href="#"><span>4</span></a></li>
                                             <li><a href="#"><span>5</span></a></li>
-                                            <li><a href="#"><span>>></span></a></li>
+                                            <li><a href="#"><span>&#62;&#62;</span></a></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
                         </tfoot>
                         <tbody>
-                                <tr>
-                                    <td><a href="show.html" class="btn-a">1</a></td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr>
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr>
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr>
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr>
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>data</td>
-                                    <td>data</td>
-                                    <td>data</td>
-                                </tr>
+                          {{#items}}
+                            <tr>
+                                <td><a href="/users/{{id}}" class="btn-a">{{id}}</a></td>
+                                <td>{{nickname}}</td>
+                                <td>{{email}}</td>
+                            </tr>
+                          {{/items}}
                         </tbody>
                     </table>
                 </div>
             </section>
         </div>
     </main>
-    <footer>
-        <nav>
-            <ul class="nav-sub-menu">
-                <li><a href="" class="menu-item">Contact us</a></li>
-                <li><a href="" class="menu-item">Github</a></li>
-            </ul>
-        </nav>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>

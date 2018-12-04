@@ -9,7 +9,7 @@ function loadingMenuAdmin(){
     }
 }
 
-function hide() {
+function hideMenu() {
     const menuAdmin = document.getElementById('menu-admin');
     if (menuAdmin.classList.contains('hide-menu')){
         menuAdmin.classList.remove('hide-menu');

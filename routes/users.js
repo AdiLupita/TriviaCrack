@@ -14,6 +14,7 @@ router.get('/profile/add_emails', CtrlUser.addEmailsPage);
 router.post('/profile/add_emails', CtrlUser.addEmail);
 router.delete('/profile/add_emails', CtrlUser.removeEmail);
 
-router.get('/users', CtrlUser.getUsers);
+router.get('/users', CtrlUser.indexPage);
+router.get('/users/:id', CtrlUser.showPage);
 
 module.exports = router;
