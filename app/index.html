@@ -38,7 +38,7 @@
         <h3>How to play</h3>
       </div>
       <div class="slides fade col-12 visible">
-        <div  class="multiple-container how-container">
+        <div class="multiple-container how-container">
           <div class="col-4 picture-how">
             <img id="picture-how" src="img/test-picture.png" class="picture col-12">
           </div>
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="slides fade col-12">
-        <div  class="multiple-container how-container">
+        <div class="multiple-container how-container">
           <div class="col-4 picture-how">
             <img id="picture-how" src="img/test-picture.png" class="col-12">
           </div>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="slides fade col-12">
-        <div  class="multiple-container how-container">
+        <div class="multiple-container how-container">
           <div class="col-4 picture-how">
             <img id="picture-how" src="img/test-picture.png" class="col-12">
           </div>
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="slides fade col-12">
-        <div  class="multiple-container how-container">
+        <div class="multiple-container how-container">
           <div class="col-4 picture-how">
             <img id="picture-how" src="img/test-picture.png" class="col-12">
           </div>
@@ -112,21 +112,21 @@
 
     <div id="login" class="modal-dialog">
       <div class="base-container col-4">
-      	<a href="#close" title="Close" class="close">X</a>
+        <a href="#close" title="Close" class="close">X</a>
         <div class="login-text">
           <h2 class="login-text">Log In</h2>
         </div>
         <form id="form-login" class="login-form" action="/login" method="POST">
+          <div id="msg-alert-log" class="alert"></div>
           <div class="input-container">
-            <input class="txt-input col-12" type="text" name="nickname" value="" autocomplete="username" autofocus="1" placeholder="Username" id="nickname" required>
+            <input class="txt-input col-12" type="text" name="nickname" value="" autocomplete="username" autofocus="1"
+              placeholder="Username" id="nickname">
           </div>
           <div class="input-container">
-            <input class="txt-input col-12" type="password" name="password" value="" placeholder="Password" id="password" required>
+            <input class="txt-input col-12" type="password" name="password" value="" placeholder="Password" id="password">
           </div>
           <div class="button-container">
-            <a href="#">
-              <button id="btn-login" class="button-1 col-12" value="1" type="button" name="login" type="button">Log In</button>
-            </a>
+            <button id="btn-login" class="button-1 col-12" value="1" type="button" name="login" type="button">Log In</button>
           </div>
         </form>
         <div class="txt-container">
@@ -140,18 +140,20 @@
             <a href="#singin">Sign up</a>
           </p>
         </div>
-    	</div>
+      </div>
     </div>
 
     <div id="singin" class="modal-dialog">
       <div class="base-container col-4">
-      	<a href="#close" title="Close" class="close">X</a>
+        <a href="#close" title="Close" class="close">X</a>
         <div class="login-text">
           <h2 class="login-text">Create new account</h2>
         </div>
         <form id="form-register" class="login-form" action="/register" method="post">
+          <div id="msg-alert-reg" class="alert"></div>
           <div class="input-container">
-            <input class="txt-input col-12" type="text" name="username" value="" autocomplete="username" autofocus="1" placeholder="Username" id="new-nickname">
+            <input class="txt-input col-12" type="text" name="username" value="" autocomplete="username" autofocus="1"
+              placeholder="Username" id="new-nickname">
           </div>
           <div class="input-container">
             <input class="txt-input col-12" type="email" name="email" value="" placeholder="Email" id="new-email">
