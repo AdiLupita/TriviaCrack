@@ -37,6 +37,16 @@ class User {
             .catch((err) => { });
         return response;
     }
+
+    async getAll(nickname, token, page) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users?page=${page}`;
+        const response = await API.getMethod(url, header)
+            .catch((err) => { });
+        return response;
+    }
 }
 
 module.exports = new User();
