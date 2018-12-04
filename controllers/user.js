@@ -12,6 +12,7 @@ class User {
             res.cookie('token', result.body.token);
             res.cookie('nickname', nickname);
             res.cookie('admin', profile.body.data.admin);
+            res.cookie('id', profile.body.data.id);
             res.redirect('/profile');
         } else if (result.statusCode === 409) {
             res.status(409).send(result);
@@ -24,6 +25,7 @@ class User {
             res.clearCookie('token');
             res.clearCookie('nickname');
             res.clearCookie('admin');
+            res.clearCookie('id');
             res.redirect('/');
         } else {
             res.status(409).send(result);
@@ -131,7 +133,7 @@ class User {
         const html = Mustache.to_html(template, data, { menu, menuadmin, footer });
         res.send(html);
     }
-    
+
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/users/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
