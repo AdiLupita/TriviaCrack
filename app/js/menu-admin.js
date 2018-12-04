@@ -2,8 +2,11 @@
 window.addEventListener('load',loadingMenuAdmin);
 
 function loadingMenuAdmin(){
-    document.getElementById('hide-menu-1').addEventListener('click', hideMenu);
-    document.getElementById('hide-menu-2').addEventListener('click', hideMenu);
+    try {
+        document.getElementById('hide-menu-1').addEventListener('click', hide);
+        document.getElementById('hide-menu-2').addEventListener('click', hide);
+    } catch (error) {
+    }
 }
 
 function hideMenu() {

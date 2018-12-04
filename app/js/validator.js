@@ -60,7 +60,6 @@ function apiLogin(nick, pass) {
                 res.json().then((msg) => {
                     window.alert(msg.body.data)
                 });
-
             }
         })
 }
@@ -123,8 +122,34 @@ function leaveSession() {
 
 window.addEventListener('load', validateRegForm);
 
-function apiRegister() {
+function apiRegister(nick, email, pass) {
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        nickname: nick,
+        password: pass,
+        email,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.post('/register', body, header)
+        .then((res) => {
+            if (res.status === 200) {
+                window.location = res.url;
+            } else {
+                res.json().then((msg) => {
+                    const field = msg.body.data;
+                    if (field.indexOf('nickname') > -1) {
+                        invalitInput(document.getElementById('new-nickname'));
+                    }
+                    if (field.indexOf('email') > -1) {
+                        invalitInput(document.getElementById('new-email'));
+                    }
 
+                    window.alert(field);
+                });
+            }
+        });
 }
 
 function validateRegData() {
@@ -132,20 +157,26 @@ function validateRegData() {
     const inptEmail = document.getElementById('new-email');
     const inptPass = document.getElementById('new-password');
     let correct = true;
-    if(!valNickname(inptNick.value)){
+    if (!valNickname(inptNick.value)) {
         invalitInput(inptNick);
-    }else{
+        correct = false;
+    } else {
         valitInput(inptNick);
     }
-    if(!valEmail(inptEmail.value)){
+    if (!valEmail(inptEmail.value)) {
         invalitInput(inptEmail);
-    }else{
+        correct = false;
+    } else {
         valitInput(inptEmail);
     }
-    if(!valPassword(inptPass.value)){
+    if (!valPassword(inptPass.value)) {
         invalitInput(inptPass);
-    }else{
+        correct = false;
+    } else {
         valitInput(inptPass);
+    }
+    if (correct) {
+        apiRegister(inptNick.value, inptEmail.value, inptPass.value);
     }
 }
 

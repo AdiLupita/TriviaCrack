@@ -8,8 +8,10 @@ class User {
         const nickname = req.body.nickname;
         const result = await MdlUser.login(req);
         if (result.statusCode === 200) {
+            const profile = await MdlUser.getProfile(nickname, result.body.token);
             res.cookie('token', result.body.token);
             res.cookie('nickname', nickname);
+            res.cookie('admin', profile.body.data.admin);
             res.redirect('/profile');
         } else if (result.statusCode === 409) {
             res.status(409).send(result);
@@ -21,9 +23,23 @@ class User {
         if (result.statusCode === 200) {
             res.clearCookie('token');
             res.clearCookie('nickname');
+            res.clearCookie('admin');
             res.redirect('/');
         } else {
             res.status(409).send(result);
+        }
+    }
+
+    async register(req, res) {
+        const nickname = req.body.nickname;
+        const result = await MdlUser.register(req);
+        if (result.statusCode === 200) {
+            res.cookie('token', result.body.token);
+            res.cookie('nickname', nickname);
+            res.redirect('/profile');
+        } else {
+            res.status(result.statusCode);
+            res.send(result);
         }
     }
 
@@ -32,10 +48,11 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const friends = fs.readFileSync('public/partials/friend_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const profile = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
         const data = {
-            nickname: req.cookies.nickname,
-            email: 'asas@gmail.com',
-            score: 123456789,
+            nickname: profile.body.data.nickname,
+            email: profile.body.data.email,
+            score: profile.body.data.score,
             personal: true,
             friends: [
                 {

@@ -3,8 +3,8 @@ const { CtrlUser } = require('../controllers');
 const router = Router();
 
 router.post('/login', CtrlUser.login);
+router.post('/register', CtrlUser.register);
 router.get('/logout', CtrlUser.logout);
-// router.get('/register', CtrlUser.registerPage);
 router.get('/profile', CtrlUser.profilePage);
 router.post('/profile', function(req, res){
     res.send('Not implemented')
