@@ -12,6 +12,7 @@ class User {
             res.cookie('token', result.body.token);
             res.cookie('nickname', nickname);
             res.cookie('admin', profile.body.data.admin);
+            res.cookie('id', profile.body.data.id);
             res.redirect('/profile');
         } else if (result.statusCode === 409) {
             res.status(409).send(result);
@@ -24,6 +25,7 @@ class User {
             res.clearCookie('token');
             res.clearCookie('nickname');
             res.clearCookie('admin');
+            res.clearCookie('id');
             res.redirect('/');
         } else {
             res.status(409).send(result);
@@ -91,16 +93,44 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const email_list = fs.readFileSync('public/partials/email_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const listEmails = await MdlUser.getEmails(req.cookies.nickname, req.cookies.token);
         const data = {
             nickname: req.cookies.nickname,
-            email: 'asas@gmail.com',
-            emails: [
-                { email: 'asas@gmail.com' },
-                { email: 'qweqwe@gmail.com' },
-                { email: '123232asd@gmail.com' },
-            ]
+            emails: listEmails.body.data,
         };
         const html = Mustache.to_html(template, data, { menu, footer, email_list });
+        res.send(html);
+    }
+
+    async addEmail(req, res) {
+        const result = await MdlUser.addEmails(req.cookies.nickname, req.body.email, req.cookies.token);
+        if (result.statusCode === 200) {
+            const template = fs.readFileSync('public/partials/email_list.mst').toString();
+            const data = {
+                emails: [result.body.data],
+            };
+            const html = Mustache.to_html(template, data).toString();
+            console.log(result.body.data);
+            res.send({ body: html });
+        } else {
+            res.status(result.statusCode).send(result);
+        }
+    }
+
+    async removeEmail(req, res) {
+        const result = await MdlUser.removeEmails(req.cookies.nickname, req.body.email, req.cookies.token);
+        res.status(result.statusCode).send(result);
+
+    }
+
+    async getUsers(req, res) {
+        const template = fs.readFileSync('public/views/users/index.mst').toString();
+        const menu = fs.readFileSync('public/partials/menu.mst').toString();
+        const menuadmin = fs.readFileSync('public/partials/menu_admin.mst').toString();
+        const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const data = {
+        };
+        const html = Mustache.to_html(template, data, { menu, menuadmin, footer });
         res.send(html);
     }
 

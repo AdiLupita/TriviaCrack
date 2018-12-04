@@ -92,6 +92,10 @@ class Question {
 
     async deleteQuestion(req, res) {
     }
+    async addQuestion(req, res) {
+        const result = await MdlQuestion.addQuestion(req.body.category, req.body.question, req.body.option1, req.body.option2, req.body.optioncorrect, req.cookies.id, req.cookies.token);
+        res.status(result.statusCode).send(result);
+    }
 }
 
 module.exports = new Question();

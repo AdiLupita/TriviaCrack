@@ -4,6 +4,7 @@ const router = Router();
 
 router.get('/question', CtrlQuestion.questionPage);
 router.get('/question/add', CtrlQuestion.addQuestionPage);
+router.post('/question/add', CtrlQuestion.addQuestion);
 
 router.get('/questions', CtrlQuestion.indexPage);
 router.get('/questions/:id', CtrlQuestion.showPage);

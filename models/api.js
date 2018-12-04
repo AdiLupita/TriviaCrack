@@ -26,7 +26,7 @@ class API {
         };
         let result = {};
         await request(options, (error, response, body) => {
-            result = { statusCode: response.statusCode, body: JSON.parse(body) };
+            result = { statusCode: response.statusCode, body: JSON.parse(body || '{}') };
         });
         return result;
     }
@@ -35,8 +35,19 @@ class API {
 
     }
 
-    async delMethod(url, body = {}, headers = {}) {
-
+    async delMethod(url, body = {}, header = {}) {
+        const options = {
+            method: 'DELETE',
+            url,
+            headers: { ...header },
+            form: { ...body },
+            simple: false,
+        };
+        let result = {};
+        await request(options, (error, response, body) => {
+            result = { statusCode: response.statusCode, body: JSON.parse(body || '{}') };
+        });
+        return result;
     }
 }
 

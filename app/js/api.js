@@ -1,8 +1,8 @@
 class API {
-    static post(url='', body={}, header={}) {
+    static post(url = '', body = {}, header = {}) {
         return fetch(url, {
             method: 'POST',
-            rejectUnauthorized:false,
+            rejectUnauthorized: false,
             headers: {
                 ...header,
             },
@@ -10,31 +10,20 @@ class API {
         });
     }
 
-    static get(url='', header={}) {
+    static get(url = '', header = {}) {
         return fetch(url, {
             method: 'GET',
-            rejectUnauthorized:false,
+            rejectUnauthorized: false,
             headers: {
                 ...header,
             },
         });
     }
 
-    static patch(url='', body={}, header={}) {
-        return fetch(url, {
-            method: 'PATCH',
-            rejectUnauthorized:false,
-            headers: {
-                ...header,
-            },
-            body,
-        });
-    }
-
-    static delete(url='', body={}, header={}) {
+    static delete(url = '', body = {}, header = {}) {
         return fetch(url, {
             method: 'DELETE',
-            rejectUnauthorized:false,
+            rejectUnauthorized: false,
             headers: {
                 ...header,
             },
