@@ -38,12 +38,32 @@ class User {
         return response;
     }
 
-    async getAll(nickname, token, page) {
+    async getAll(token, page) {
         const header = {
             token: token,
         };
         const url = `${process.env.HOST}/users?page=${page}`;
         const response = await API.getMethod(url, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async editUser(nickname, token,  req) {
+        const header = {
+            token: token,
+          };
+        const url = `${process.env.HOST}/users/${nickname}`;
+        const response = await API.patchMethod(url, req.body, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async deleteUser(nickname, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}`;
+        const response = await API.deleteMethod(url, {}, header)
             .catch((err) => { });
         return response;
     }

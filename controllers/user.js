@@ -113,11 +113,8 @@ class User {
         if (req.query !== undefined && req.query.page !== undefined) {
             page = req.query.page;
         }
-        const result = await MdlUser.getAll(req.cookies.nickname, req.cookies.token, page);
-        if (result.statusCode === 200) {
-            res.cookie('token', result.body.token);
-            res.cookie('nickname', req.body.nickname);
-        } else {
+        const result = await MdlUser.getAll(req.cookies.token, page);
+        if (result.statusCode !== 200) {
             res.status(result.statusCode);
             res.send(result);
         }
@@ -134,83 +131,63 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const delete_modal = fs.readFileSync('public/partials/delete_modal.mst').toString();
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             personal: true,
-            friends: [
+            route: 'users',
+            emails: [
                 {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
+                    email: 'Asasdas1@asdad.com',
                 },
                 {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
+                    email: 'Asasdas2@asdad.com',
                 },
                 {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                }
+                    email: 'Asasdas3@asdad.com',
+                },
             ]
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
+        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, delete_modal });
         res.send(html);
     }
 
     async editPage(req, res) {
-        const template = fs.readFileSync('public/views/users/show.mst').toString();
+        const template = fs.readFileSync('public/views/users/edit.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
-            id: req.params.id,
-            nickname: req.cookies.nickname,
-            email: 'asas@gmail.com',
-            score: 123456789,
+            nickname: profile.body.data.nickname,
+            email: profile.body.data.email,
+            score: profile.body.data.score,
             personal: true,
-            emails: [
-                {
-                    email: 'Asasdas_asdad',
-                },
-                {
-                    email: 'Asasdas_asdad',
-                },
-                {
-                    email: 'Asasdas_asdad',
-                }
-            ]
         };
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
         res.send(html);
     }
 
+    async editUser(req, res) {
+        const nickname = req.body.nickname;
+        const result = await MdlUser.editUser(req);
+        if (result.statusCode !== 200) {
+            res.status(result.statusCode);
+            res.send(result);
+        }
+    }
+
     async deleteUser(req, res) {
-        const template = fs.readFileSync('public/views/users/show.mst').toString();
-        const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
-        const footer = fs.readFileSync('public/partials/footer.mst').toString();
-        const data = {
-            id: req.params.id,
-            nickname: req.cookies.nickname,
-            email: 'asas@gmail.com',
-            score: 123456789,
-            personal: true,
-            emails: [
-                {
-                    email: 'Asasdas_asdad',
-                },
-                {
-                    email: 'Asasdas_asdad',
-                },
-                {
-                    email: 'Asasdas_asdad',
-                }
-            ]
-        };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
-        res.send(html);
+        const result = await MdlUser.login(req);
+        if (result.statusCode === 200) {
+            const profile = await MdlUser.deleteUser(nickname, result.body.token);
+            res.redirect('/users');
+        } else if (result.statusCode === 409) {
+            res.status(409).send(result);
+        }
     }
 }
 
