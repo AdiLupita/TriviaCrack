@@ -9,7 +9,7 @@ class API {
             body,
         });
     }
-    
+
     static get(url='', header={}) {
         return fetch(url, {
             method: 'GET',
@@ -17,6 +17,28 @@ class API {
             headers: {
                 ...header,
             },
+        });
+    }
+
+    static patch(url='', body={}, header={}) {
+        return fetch(url, {
+            method: 'PATCH',
+            rejectUnauthorized:false,
+            headers: {
+                ...header,
+            },
+            body,
+        });
+    }
+
+    static delete(url='', body={}, header={}) {
+        return fetch(url, {
+            method: 'DELETE',
+            rejectUnauthorized:false,
+            headers: {
+                ...header,
+            },
+            body,
         });
     }
 }
