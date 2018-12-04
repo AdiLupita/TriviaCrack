@@ -1,3 +1,12 @@
+
+:root {
+    --main-color: #024a59;
+}
+
+.container-admin {
+    padding-top: 7%;
+}
+
 /* inputs */
 input, select {
   padding: 10px;
@@ -51,8 +60,21 @@ span {
     cursor: hand;
 }
 
+span#hide-menu-1, .hide-menu-1 {
+    color: var(--main-color);
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+}
+
+span#hide-menu-1:hover{
+    color: #FFF;
+    background-color: var(--main-color);
+}
+
 .hide-menu {
-    max-width: 0;
+    display: none;
 }
 
 .menu-admin {
@@ -69,7 +91,7 @@ span {
 }
 
 ul.menu-admin {
-    background-color: #112F41;
+    background-color: var(--main-color);
     list-style: none;
 }
 
@@ -87,9 +109,8 @@ ul.menu-admin a {
 }
 
 ul.menu-admin a:hover{
-    color: #112F41;
+    color: var(--main-color);
     background-color: #F2B134;
-    border-radius: 5px;
 }
 
 .hide-mneu {
@@ -312,4 +333,28 @@ ul.menu-admin a:hover{
 }
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1000px) {
+    .container-admin {
+        padding-top: 10%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .container-admin {
+        padding-top: 13%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container-admin {
+        padding-top: 16%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container-admin {
+        padding-top: 30%;
+    }
 }

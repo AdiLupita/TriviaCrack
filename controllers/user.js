@@ -87,14 +87,15 @@ class User {
         res.send(html);
     }
 
-    async getUsers(req, res) {
+    async indexPage(req, res) {
         const template = fs.readFileSync('public/views/users/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menuadmin = fs.readFileSync('public/partials/menu_admin.mst').toString();
+        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const data = {
+            nickname: req.cookies.nickname,
         };
-        const html = Mustache.to_html(template, data, { menu, menuadmin, footer });
+        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
         res.send(html);
     }
 }

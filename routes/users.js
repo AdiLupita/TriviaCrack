@@ -12,6 +12,6 @@ router.post('/profile', function(req, res){
 router.get('/profile/edit', CtrlUser.profileEditPage);
 router.get('/profile/add_emails', CtrlUser.addEmailsPage);
 
-router.get('/users', CtrlUser.getUsers);
+router.get('/users', CtrlUser.indexPage);
 
 module.exports = router;
