@@ -187,3 +187,83 @@ function validateRegForm() {
     } catch (error) {
     }
 }
+
+window.addEventListener('load', validateAddEmailForm);
+
+function apiAddEmail(email) {
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        email,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.post('/profile/add_emails', body, header)
+        .then((res) => {
+            if (res.status === 200) {
+                res.json()
+                    .then((r) => {
+                        const newDiv = document.createElement('div')
+                        newDiv.innerHTML = r.body;
+                        const newForm = newDiv.children[0];
+                        document.getElementById('list-emails').appendChild(newForm);
+                        document.getElementById('inp-add-email').value = '';
+                    })
+            } else {
+                invalitInput(document.getElementById('inp-add-email'));
+            }
+        });
+}
+
+function validateAddEmailData() {
+    const inpAdd = document.getElementById('inp-add-email');
+    let correct = true;
+    if (!valEmail(inpAdd.value)) {
+        invalitInput(inpAdd);
+        correct = false;
+    } else {
+        valitInput(inpAdd);
+    }
+    if (correct) {
+        // console.log('piu');
+        apiAddEmail(inpAdd.value);
+    }
+}
+
+function validateAddEmailForm() {
+    try {
+        const btnAdd = document.getElementById('btn-add-email');
+        btnAdd.addEventListener('click', validateAddEmailData);
+    } catch (error) {
+    }
+}
+
+window.addEventListener('load', validateRemoveEmailForms);
+
+function apiRemoveEmail() {
+    var parent = this.parentNode;
+    var supParen = parent.parentNode;
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        email: parent.children[0].value,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.delete('/profile/add_emails', body, header)
+        .then((res) => {
+            if (res.status === 204) {
+                supParen.removeChild(parent);
+            } else {
+                window.alert('something unexpected happened');
+            }
+        })
+
+}
+
+function validateRemoveEmailForms() {
+    const buttons = document.getElementsByClassName('btn-icon');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', apiRemoveEmail);
+    }
+}

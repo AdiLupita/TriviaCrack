@@ -11,6 +11,8 @@ router.post('/profile', function(req, res){
 });
 router.get('/profile/edit', CtrlUser.profileEditPage);
 router.get('/profile/add_emails', CtrlUser.addEmailsPage);
+router.post('/profile/add_emails', CtrlUser.addEmail);
+router.delete('/profile/add_emails', CtrlUser.removeEmail);
 
 router.get('/users', CtrlUser.getUsers);
 

@@ -37,6 +37,42 @@ class User {
             .catch((err) => { });
         return response;
     }
+
+    async getEmails(nickname, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}/emails`;
+        const response = await API.getMethod(url, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async addEmails(nickname, email, token) {
+        const header = {
+            token: token,
+        };
+        const body = {
+            email,
+        };
+        const url = `${process.env.HOST}/users/${nickname}/emails`;
+        const response = await API.postMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async removeEmails(nickname, email, token) {
+        const header = {
+            token: token,
+        };
+        const body = {
+            email,
+        };
+        const url = `${process.env.HOST}/users/${nickname}/emails`;
+        const response = await API.delMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
 }
 
 module.exports = new User();
