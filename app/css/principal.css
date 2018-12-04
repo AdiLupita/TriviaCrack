@@ -1,0 +1,93 @@
+:root {
+    --name-text-color: #ec2a2a;
+    --text-shadow-color: #000;
+    --welcome-color: #000055;
+    --tutorial-color: #FFF;
+}
+
+h1 {
+    font-size: 50px;
+    color: var(--name-text-color);
+    text-shadow: 2px 2px var(--text-shadow-color);
+    display: inline;
+}
+
+h2 {
+    font-size:  40px;
+    color: var(--welcome-color);
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.welcome-item {
+    width: 100%;
+    padding-top: 15px;
+}
+
+.intro {
+    border: none;
+    text-align: center;
+    margin: 15px 20px;
+    padding: 10% 0;
+}
+
+.intro-text {
+    font-size: 60px;
+    text-align: center;
+    margin: 5% 10%;
+}
+
+.how-container {
+    margin: 0 10%;
+}
+
+.picture-how {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.picture-how.picture {
+    max-height: 100px;
+    max-width: 50px;
+}
+
+.text-how {
+    padding: 15px 7%;
+    text-align: center;
+    color: var(--tutorial-color);
+}
+
+.no-visible {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .intro h1 {
+        font-size: 35px;
+    }
+
+    h2 {
+        font-size:  25px;
+    }
+
+    .intro {
+        padding-top: 15%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .intro {
+        padding-top: 20%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .intro h1 {
+        display: none;
+    }
+
+    .intro {
+        padding-top: 30%;
+    }
+}

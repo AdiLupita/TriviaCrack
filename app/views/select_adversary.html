@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Trivia Crack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/library.css">
+    <link rel="stylesheet" href="../css/grid.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/inputs.css">
+    <!-- endbuild -->
+    <link rel="shortcut icon" href="../favicon.ico">
+    <!-- build:js -->
+    <script src="../js/principal.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    {{>menu}}
+    <main>
+        <div class="base-container col-10">
+            <div class="multiple-container">
+                <div class="col-12 tlt-center">
+                    <h1>Select Adversary</h1>
+                </div>
+            </div>
+            <div class="multiple-container list-friends">
+                {{>friends}}
+            </div>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

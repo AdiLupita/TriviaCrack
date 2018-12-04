@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Trivia Crack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/library.css">
+    <link rel="stylesheet" href="../css/grid.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/inputs.css">
+    <link rel="stylesheet" href="../css/principal.css">
+    <!-- endbuild -->
+    <link rel="shortcut icon" href="../favicon.ico">
+    <!-- build:js -->
+    <script src="js/menu.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    {{>menu}}
+    <main>
+        <div class="base-container col-10">
+            <div id="list-emails" class="multiple-container">
+                <h1>Add emails</h1>
+                <form id="add-email-form" action="POST" class="col-12">
+                    <div class="email-list">
+                        <input id="inp-add-email" type="email" class="txt-input" placeholder="Write a new email">
+                        <button id="btn-add-email" type="button" class="btn-submit">Add</button>
+                    </div>
+                </form>
+                {{>email_list}}
+                <br>
+            </div>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

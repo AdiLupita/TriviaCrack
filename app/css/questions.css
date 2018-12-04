@@ -1,0 +1,26 @@
+.tlt-cat{
+    background: var(--highlight-color);
+    color: var(--txt-m-color);
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.img-cat {
+    max-width: 45px;
+    max-height: 45px;
+    margin: auto 10px;
+}
+
+.quest {
+    margin: 4px 0;
+}
+
+.question {
+    padding: 20px 15px 5px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.question p {
+    margin: 10px;
+}

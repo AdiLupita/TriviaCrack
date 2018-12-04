@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Trivia Crack</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- build:css -->
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/library.css">
+    <link rel="stylesheet" href="../../css/grid.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="shortcut icon" href="../../favicon.ico">
+  <!-- endbuild -->
+  <!-- build:js -->
+    <script src="../../js/menu-admin.js"></script>
+    <script src="../../js/principal.js"></script>   
+  <!-- endbuild -->
+</head>
+
+<body>
+    {{>menu}}
+    <main>
+        <div class="container">
+            <div class="container container-menu">
+            {{>menu_admin}}
+            </div>
+            <section class="col-11 container-admin ">
+                <h1>Users</h1>
+                <hr/>
+                <div class="datagrid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NICKNAME</th>
+                                <th>EMAIL</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <div id="paging">
+                                        <ul>
+                                            <li><a href="#"><span>&#60;&#60;</span></a></li>
+                                            <li><a href="#" class="active"><span>1</span></a></li>
+                                            <li><a href="#"><span>2</span></a></li>
+                                            <li><a href="#"><span>3</span></a></li>
+                                            <li><a href="#"><span>4</span></a></li>
+                                            <li><a href="#"><span>5</span></a></li>
+                                            <li><a href="#"><span>&#62;&#62;</span></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                          {{#items}}
+                            <tr>
+                                <td><a href="/users/{{nickname}}" class="btn-a">{{id}}</a></td>
+                                <td>{{nickname}}</td>
+                                <td>{{email}}</td>
+                            </tr>
+                          {{/items}}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

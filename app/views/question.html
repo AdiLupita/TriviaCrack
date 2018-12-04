@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Trivia Crack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/library.css">
+    <link rel="stylesheet" href="../css/grid.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/questions.css">
+    <!-- endbuild -->
+    <link rel="shortcut icon" href="../favicon.ico">
+    <!-- build:js -->
+    <script src="../js/principal.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    {{>menu}}
+    <main>
+        <section class="base-container col-10">
+            <div class="multiple-container">
+                <div class="col-12">
+                    <div class="multiple-container tlt-cat">
+                        <img src="{{{img}}}" class="col-1 img-cat">
+                        <div class="col-11">
+                            <h1>{{category}}</h1>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>{{question}}</p>
+                        <form action="">
+                            <button class="btn-option">
+                                {{opc1}}
+                            </button>
+                            <button class="btn-option">
+                                {{opc2}}
+                            </button>
+                            <button class="btn-option">
+                                {{opc3}}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

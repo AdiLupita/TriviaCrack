@@ -1,0 +1,99 @@
+.btn-play {
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  background: var(--constrast-color);
+  color: var(--txt-m-color);
+  font-size: 30px;
+  padding: 2px 20px;
+  transition: 0.4s;
+}
+
+.btn-play:hover {
+  background: var(--complementary-color);
+  box-shadow: 1px 2px var(--highlight-color);
+  color: var(--txt-m-color);
+}
+
+.btn-submit {
+  text-decoration: none;
+  background: var(--constrast-color);
+  color: var(--txt-m-color);
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px var(--highlight-color);
+  padding: 5px 10px;
+  transition: 0.4s;
+}
+
+.btn-submit:hover{
+  background: var(--complementary-color);
+}
+
+.btn-icon {
+  min-width: 40px;
+  text-decoration: none;
+  background: var(--constrast-color);
+  color: var(--txt-m-color);
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px var(--highlight-color);
+  padding: 5px 10px;
+  transition: 0.4s;
+}
+
+.btn-icon:hover {
+  background: var(--complementary-color);
+}
+
+.btn-a {
+  text-decoration: none;
+  background: var(--constrast-color);
+  color: var(--txt-m-color);
+  padding: 7px 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 0px var(--highlight-color);
+  transition: 0.4s;
+}
+
+.btn-a:hover {
+  background: var(--complementary-color);
+}
+
+.btn-option {
+  min-width: 90%;
+  margin: 0 5%;
+  background: var(--constrast-color);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 0px var(--highlight-color);
+  padding: 7px 10px;
+  margin: 5px 5% 5px;
+  transition: 0.4s;
+  color: var(--txt-m-color);
+  font-size: 18px;
+}
+
+.btn-option:hover {
+  background: var(--complementary-color);
+}
+
+.button-1 {
+  padding: 3% 6%;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--constrast-color);
+  color: #000000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 1px 1px 2px 0px var(--highlight-color);
+}
+
+.button-1:hover {
+  background-color: var(--complementary-color);
+  color: #ffffff;
+}

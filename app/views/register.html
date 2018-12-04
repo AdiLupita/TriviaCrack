@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Trivia Crack Register</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- build:css -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/library.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/inputs.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/grid.css">
+  <!-- endbuild -->
+  <link rel="shortcut icon" href="../favicon.ico">
+  <!-- build:js -->
+  <script src="../js/principal.js"></script>
+  <!-- endbuild -->
+</head>
+
+<body>
+  {{>menu}}
+  <main>
+    <div class="base-container col-4">
+      <div class="login-text">
+        <h1 class="login-text">Create new account</h1>
+      </div>
+      <form class="login-form" action="index.html" method="post">
+        <div class="input-container">
+          <input class="txt-input col-12" type="text" name="username" value="" autocomplete="username" autofocus="1"
+            placeholder="Username">
+        </div>
+        <div class="input-container">
+          <input class="txt-input col-12" type="email" name="email" value="" placeholder="Email">
+        </div>
+        <div class="input-container">
+          <input class="txt-input col-12" type="password" name="password" value="" placeholder="Password">
+        </div>
+        <div class="multiple-container button-container col-12">
+          <div class="col-6">
+            <button class="button-1 col-12" value="1" type="button" name="register" type="submit">Create</button>
+          </div>
+          <div class="txt-container col-6">
+            <p>
+              or
+              <a href="/login">Log In</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  {{>footer}}
+</body>
+
+</html>
