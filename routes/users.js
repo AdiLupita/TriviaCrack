@@ -13,5 +13,6 @@ router.get('/profile/edit', CtrlUser.profileEditPage);
 router.get('/profile/add_emails', CtrlUser.addEmailsPage);
 
 router.get('/users', CtrlUser.indexPage);
+router.get('/users/:id', CtrlUser.showPage);
 
 module.exports = router;

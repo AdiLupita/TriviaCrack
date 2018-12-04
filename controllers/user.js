@@ -94,6 +94,61 @@ class User {
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const data = {
             nickname: req.cookies.nickname,
+            items: [
+              {
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              },{
+                id: 1,
+                nickname: 'nickname',
+                email: 'email',
+              }
+            ],
+        };
+        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
+        res.send(html);
+    }
+
+    async showPage(req, res) {
+        const template = fs.readFileSync('public/views/users/show.mst').toString();
+        const menu = fs.readFileSync('public/partials/menu.mst').toString();
+        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
+        const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const data = {
+            nickname: req.cookies.nickname,
         };
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
         res.send(html);
