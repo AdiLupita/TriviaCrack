@@ -1,8 +1,8 @@
-function invalitInput(node) {
+function invalidInput(node) {
     node.classList.add('incorrect');
 }
 
-function valitInput(node) {
+function validInput(node) {
     node.classList.remove('incorrect');
 }
 
@@ -70,16 +70,16 @@ function valInputLogin() {
     const passwordInput = formLogin.elements.namedItem('password');
     let correct = true;
     if (!valNickname(nicknameInput.value)) {
-        invalitInput(nicknameInput);
+        invalidInput(nicknameInput);
         correct = false;
     } else {
-        valitInput(nicknameInput);
+        validInput(nicknameInput);
     }
     if (!valNickname(passwordInput.value)) {
-        invalitInput(passwordInput);
+        invalidInput(passwordInput);
         correct = false;
     } else {
-        valitInput(passwordInput);
+        validInput(passwordInput);
     }
     if (correct) {
         apiLogin(nicknameInput.value, passwordInput.value);
@@ -140,10 +140,10 @@ function apiRegister(nick, email, pass) {
                 res.json().then((msg) => {
                     const field = msg.body.data;
                     if (field.indexOf('nickname') > -1) {
-                        invalitInput(document.getElementById('new-nickname'));
+                        invalidInput(document.getElementById('new-nickname'));
                     }
                     if (field.indexOf('email') > -1) {
-                        invalitInput(document.getElementById('new-email'));
+                        invalidInput(document.getElementById('new-email'));
                     }
 
                     window.alert(field);
@@ -158,22 +158,22 @@ function validateRegData() {
     const inptPass = document.getElementById('new-password');
     let correct = true;
     if (!valNickname(inptNick.value)) {
-        invalitInput(inptNick);
+        invalidInput(inptNick);
         correct = false;
     } else {
-        valitInput(inptNick);
+        validInput(inptNick);
     }
     if (!valEmail(inptEmail.value)) {
-        invalitInput(inptEmail);
+        invalidInput(inptEmail);
         correct = false;
     } else {
-        valitInput(inptEmail);
+        validInput(inptEmail);
     }
     if (!valPassword(inptPass.value)) {
-        invalitInput(inptPass);
+        invalidInput(inptPass);
         correct = false;
     } else {
-        valitInput(inptPass);
+        validInput(inptPass);
     }
     if (correct) {
         apiRegister(inptNick.value, inptEmail.value, inptPass.value);
@@ -210,7 +210,7 @@ function apiAddEmail(email) {
                         document.getElementById('inp-add-email').value = '';
                     })
             } else {
-                invalitInput(document.getElementById('inp-add-email'));
+                invalidInput(document.getElementById('inp-add-email'));
             }
         });
 }
@@ -219,10 +219,10 @@ function validateAddEmailData() {
     const inpAdd = document.getElementById('inp-add-email');
     let correct = true;
     if (!valEmail(inpAdd.value)) {
-        invalitInput(inpAdd);
+        invalidInput(inpAdd);
         correct = false;
     } else {
-        valitInput(inpAdd);
+        validInput(inpAdd);
     }
     if (correct) {
         // console.log('piu');
@@ -262,8 +262,91 @@ function apiRemoveEmail() {
 }
 
 function validateRemoveEmailForms() {
-    const buttons = document.getElementsByClassName('btn-icon');
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', apiRemoveEmail);
+    try {
+        const buttons = document.getElementsByClassName('btn-icon');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', apiRemoveEmail);
+        }
+    } catch (error) {
+    }
+}
+
+window.addEventListener('load', validateAddQuestionForm);
+
+function apiAddQuestion(category, question, opc1, opc2, opcC) {
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        category,
+        question,
+        option1: opc1,
+        option2: opc2,
+        optioncorrect: opcC,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.post('/question/add', body, header)
+        .then((res) => {
+            if (res.status === 200) {
+                window.alert('Question created');
+                document.getElementById('form-add-question').reset();
+            } else {
+                res.json()
+                    .then((r) => {
+                        invalidInput(document.getElementById('txt-a-question'));
+                        window.alert(r.body.data);
+                    });
+            }
+        });
+}
+
+function validateAddQuestionData() {
+    const slcCategory = document.getElementById('slc-category');
+    const txtArea = document.getElementById('txt-a-question');
+    const inpOpc1 = document.getElementById('inp-opcion-1');
+    const inpOpc2 = document.getElementById('inp-opcion-2');
+    const inpOpcC = document.getElementById('inp-opcion-c');
+    var correct = true;
+    if (!valId(slcCategory.value)) {
+        invalidInput(slcCategory);
+        correct = false;
+    } else {
+        validInput(slcCategory);
+    }
+    if (!valText(txtArea.value)) {
+        invalidInput(txtArea);
+        correct = false;
+    } else {
+        validInput(txtArea);
+    }
+    if (!valText(inpOpc1.value)) {
+        invalidInput(inpOpc1);
+        correct = false;
+    } else {
+        validInput(inpOpc1);
+    }
+    if (!valText(inpOpc2.value)) {
+        invalidInput(inpOpc2);
+        correct = false;
+    } else {
+        validInput(inpOpc2);
+    }
+    if (!valText(inpOpcC.value)) {
+        invalidInput(inpOpcC);
+        correct = false;
+    } else {
+        validInput(inpOpcC);
+    }
+    if (correct) {
+        apiAddQuestion(slcCategory.value, txtArea.value,
+            inpOpc1.value, inpOpc2.value, inpOpcC.value);
+    }
+}
+
+function validateAddQuestionForm() {
+    try {
+        const btn = document.getElementById('btn-add-question');
+        btn.addEventListener('click', validateAddQuestionData);
+    } catch (error) {
     }
 }
