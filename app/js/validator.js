@@ -1,9 +1,26 @@
+const MSG_INVAL_NICKNAME = 'Not valid nickname';
+const MSG_INVAL_PASSWORD = 'Not valid password';
+const MSG_INVAL_EMAIL = 'Not valid email format';
+const MSG_INVAL_WORD = 'Not valid word';
+const MSG_INVAL_TEXT = 'Not valid text';
+const MSG_INVAL_FILE = 'Not valid file extension';
+const MSG_INVAL_ID = 'Not valid id';
+
 function invalidInput(node) {
     node.classList.add('incorrect');
 }
 
 function validInput(node) {
     node.classList.remove('incorrect');
+}
+
+function msgErrVal(id, msg) {
+    document.getElementById(id).classList.add('alert-show');
+    document.getElementById(id).innerHTML = msg;
+}
+
+function msgErrValHide(id) {
+    document.getElementById(id).classList.remove('alert-show');
 }
 
 const VALITATIONS = {
@@ -58,7 +75,7 @@ function apiLogin(nick, pass) {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    window.alert(msg.body.data)
+                    msgErrVal('msg-alert-log', msg.body.data);
                 });
             }
         })
@@ -69,20 +86,26 @@ function valInputLogin() {
     const nicknameInput = formLogin.elements.namedItem('nickname');
     const passwordInput = formLogin.elements.namedItem('password');
     let correct = true;
+    const msg = [];
     if (!valNickname(nicknameInput.value)) {
         invalidInput(nicknameInput);
+        msg.push(MSG_INVAL_NICKNAME);
         correct = false;
     } else {
         validInput(nicknameInput);
     }
-    if (!valNickname(passwordInput.value)) {
+    if (!valPassword(passwordInput.value)) {
         invalidInput(passwordInput);
+        msg.push(MSG_INVAL_PASSWORD);
         correct = false;
     } else {
         validInput(passwordInput);
     }
     if (correct) {
+        msgErrValHide('msg-alert-log');
         apiLogin(nicknameInput.value, passwordInput.value);
+    } else {
+        msgErrVal('msg-alert-log', msg.join(', '));
     }
 }
 
@@ -140,13 +163,13 @@ function apiRegister(nick, email, pass) {
                 res.json().then((msg) => {
                     const field = msg.body.data;
                     if (field.indexOf('nickname') > -1) {
+                        msgErrVal('msg-alert-reg', field);
                         invalidInput(document.getElementById('new-nickname'));
                     }
                     if (field.indexOf('email') > -1) {
+                        msgErrVal('msg-alert-reg', field);
                         invalidInput(document.getElementById('new-email'));
                     }
-
-                    window.alert(field);
                 });
             }
         });
@@ -157,26 +180,33 @@ function validateRegData() {
     const inptEmail = document.getElementById('new-email');
     const inptPass = document.getElementById('new-password');
     let correct = true;
+    const msg = []
     if (!valNickname(inptNick.value)) {
         invalidInput(inptNick);
         correct = false;
+        msg.push(MSG_INVAL_NICKNAME);
     } else {
         validInput(inptNick);
     }
     if (!valEmail(inptEmail.value)) {
         invalidInput(inptEmail);
         correct = false;
+        msg.push(MSG_INVAL_EMAIL);
     } else {
         validInput(inptEmail);
     }
     if (!valPassword(inptPass.value)) {
         invalidInput(inptPass);
         correct = false;
+        msg.push(MSG_INVAL_PASSWORD);
     } else {
         validInput(inptPass);
     }
     if (correct) {
+        msgErrValHide('msg-alert-reg');
         apiRegister(inptNick.value, inptEmail.value, inptPass.value);
+    } else {
+        msgErrVal('msg-alert-reg', msg.join(', '));
     }
 }
 
