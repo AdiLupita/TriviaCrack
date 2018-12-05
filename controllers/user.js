@@ -55,6 +55,7 @@ class User {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
+            avatar: profile.body.avatar,
             personal: true,
             friends: [
                 {
