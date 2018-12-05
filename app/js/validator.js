@@ -301,8 +301,7 @@ function apiRemoveEmail() {
 
 function validateRemoveEmailForms() {
     try {
-        const listBtns = document.getElementsByClassName('email-list');
-        const buttons = listBtns.getElementsByClassName('btn-icon');
+        const buttons = document.getElementsByName('btn-rm-email');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', apiRemoveEmail);
         }
@@ -466,10 +465,10 @@ function validateEditProfileData() {
             validInput(inpFile);
         }
     }
-    if(correct){
+    if (correct) {
         msgErrValHide('msg-alert-edit-profile');
         apiEditProfile();
-    }else{
+    } else {
         msgErrVal('msg-alert-edit-profile', msg.join(', '));
     }
 }
@@ -482,3 +481,26 @@ function validateEditProfileForm() {
 
     }
 }
+
+window.addEventListener('load', validatePlayForm);
+
+function apiRemoveFriend() {
+    console.log('NotImplemented');
+}
+
+function apiPlay() {
+    console.log('NotImplemented');
+}
+
+function validatePlayForm() {
+    try {
+        const btnsPlay = document.getElementsByName('play');
+        const btnsRemove = document.getElementsByName('remove');
+        for (let i = 0; i < btnsPlay.length; i++) {
+            btnsPlay[i].addEventListener('click', apiPlay);
+            btnsRemove[i].addEventListener('click', apiRemoveFriend);
+        }
+    } catch (error) {
+    }
+}
+
