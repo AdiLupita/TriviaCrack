@@ -140,7 +140,6 @@ function leaveSession() {
     }
 }
 
-
 window.addEventListener('load', validateRegForm);
 
 function apiRegister(nick, email, pass) {
@@ -272,6 +271,25 @@ function validateAddEmailForm() {
         const btnAdd = document.getElementById('btn-add-email');
         btnAdd.addEventListener('click', validateAddEmailData);
     } catch (error) {
+    }
+}
+
+window.addEventListener('load', pagAddEmailForm);
+
+function loadAddEmailPage() {
+    console.log('click', this.value);
+    window.location = `/profile/add_emails?page=${this.value}`;
+}
+
+function pagAddEmailForm() {
+    try {
+        const form = document.getElementById('pag-emails');
+        const btns = form.getElementsByTagName('button');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', loadAddEmailPage);
+        }
+    } catch (error) {
+
     }
 }
 
