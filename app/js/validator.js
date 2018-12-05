@@ -485,17 +485,17 @@ function validateEditProfileForm() {
 window.addEventListener('load', validatePlayForm);
 
 function apiRemoveFriend() {
-    console.log('NotImplemented');
+    console.log('Remove not implemented');
 }
 
 function apiPlay() {
-    console.log('NotImplemented');
+    console.log('play not implemented');
 }
 
 function validatePlayForm() {
     try {
-        const btnsPlay = document.getElementsByName('play');
-        const btnsRemove = document.getElementsByName('remove');
+        const btnsPlay = document.getElementsByName('btn-play-friend');
+        const btnsRemove = document.getElementsByName('btn-rm-friend');
         for (let i = 0; i < btnsPlay.length; i++) {
             btnsPlay[i].addEventListener('click', apiPlay);
             btnsRemove[i].addEventListener('click', apiRemoveFriend);
