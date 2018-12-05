@@ -9,7 +9,7 @@ class User {
         const result = await MdlUser.login(req);
         if (result.statusCode === 200) {
             const profile = await MdlUser.getProfile(nickname, result.body.token);
-            res.cookie('token', result.body.token, { expires: new Date(Date.now() + 900000) });
+            res.cookie('token', result.body.token);
             res.cookie('nickname', nickname);
             res.cookie('admin', profile.body.data.admin);
             res.cookie('id', profile.body.data.id);
