@@ -7,8 +7,13 @@ class Game {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const friends = fs.readFileSync('public/partials/friend_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const data = {
             nickname: req.cookies.nickname,
+            admin: manage,
             adversary: true,
             friends: [
                 {
@@ -24,7 +29,7 @@ class Game {
                     nickname: 'Asasdas_asdad',
                 }
             ]
-        
+
         };
         const html = Mustache.to_html(template, data, { menu, footer, friends });
         res.send(html);
@@ -34,8 +39,13 @@ class Game {
         const template = fs.readFileSync('public/views/roulette.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const data = {
             nickname: req.cookies.nickname,
+            admin: manage,
         };
         const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
