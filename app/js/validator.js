@@ -29,7 +29,7 @@ const VALITATIONS = {
     word: /[a-zA-ZñÑ ]{3,}/,
     text: /[\wñÑ #@$%?()]{3,}/,
     password: /^[\wñÑ#@$%]{5,}$/,
-    file: /^[\w]+\.(png|jpg)$/,
+    file: /^[\w]+\.(png|jpg|jpeg)$/,
     email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 }
 
@@ -399,15 +399,86 @@ function validateAddQuestionForm() {
 
 window.addEventListener('load', validateAddFriendsForm);
 
-function apiAddFriend(friend) {
-
+function apiAddFriend() {
+    console.log('Not implemented');
 }
 
 function validateAddFriendsData() {
-    console.log('validando');
+    const inpFriend = document.getElementById('inp-nick-friend');
+    let correct = true;
+    let msg = '';
+    if (!valNickname(inpFriend.value)) {
+        invalidInput(inpFriend);
+        msg = MSG_INVAL_NICKNAME;
+        correct = false;
+    } else {
+        validInput(inpFriend);
+    }
+    if (correct) {
+        msgErrValHide('msg-alert-add-friend');
+        apiAddFriend();
+    } else {
+        msgErrVal('msg-alert-add-friend', msg);
+    }
 }
 
 function validateAddFriendsForm() {
-    const btn = document.getElementById('btn-add-friend');
-    btn.addEventListener('click', validateAddFriendsData);
+    try {
+        const btn = document.getElementById('btn-add-friend');
+        btn.addEventListener('click', validateAddFriendsData);
+    } catch (error) {
+    }
+}
+
+window.addEventListener('load', validateEditProfileForm);
+
+
+function apiEditProfile() {
+    console.log('not implemented');
+}
+
+function validateEditProfileData() {
+    const inpEmail = document.getElementById('inp-new-email');
+    const inpPass = document.getElementById('inp-new-pass');
+    const inpFile = document.getElementById('inp-file-avatar');
+    let correct = true;
+    const msg = [];
+    if (!valEmail(inpEmail.value)) {
+        invalidInput(inpEmail);
+        msg.push(MSG_INVAL_EMAIL);
+        correct = false;
+    } else {
+        validInput(inpEmail);
+    }
+    if (!valPassword(inpPass.value)) {
+        invalidInput(inpPass);
+        msg.push(MSG_INVAL_PASSWORD);
+        correct = false;
+    } else {
+        validInput(inpPass);
+    }
+    if (inpFile.files[0]) {
+        if (!valFile(inpFile.files[0].name)) {
+            invalidInput(inpFile);
+            msg.push(MSG_INVAL_FILE);
+            correct = false;
+        } else {
+            validInput(inpFile);
+        }
+    }
+    if(correct){
+        msgErrValHide('msg-alert-edit-profile');
+        apiEditProfile();
+    }else{
+        msgErrVal('msg-alert-edit-profile', msg.join(', '));
+    }
+}
+
+function validateEditProfileForm() {
+    try {
+        const btn = document.getElementById('btn-edit-profile');
+        btn.addEventListener('click', validateEditProfileData);
+    } catch (error) {
+
+    }
 }

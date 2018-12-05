@@ -1,1 +1,1 @@
-{{#emails}}<form action="" class="col-12"><div class="email-list col-12"><input type="email" class="txt-input" readonly="readonly" value="{{{email}}}"> <button type="button" class="btn-icon"><i class="fa fa-times"></i></button></div></form>{{/emails}}
+{{#emails}}<form action="" class="col-12"><div class="email-list col-12"><input type="email" class="txt-input" readonly="readonly" value="{{{email}}}"> <button type="button" class="btn-icon btn-remove"><i class="fa fa-times"></i></button></div></form>{{/emails}}
