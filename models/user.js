@@ -114,10 +114,12 @@ class User {
         const url = `${process.env.HOST}/users/${nickname}/friends`;
         const response = await API.postMethod(url, body, header)
             .catch((err) => { });
-        if (response.body.data.avatar === 'default.png') {
-            response.body.data.avatar = `/img/default.png`;
-        } else if (!path.test(response.body.data.avatar)) {
-            response.body.data.avatar = `${process.env.HOST}/uploads/${response.body.data.avatar}`;
+        if (response.statusCode === 200) {
+            if (response.body.data.avatar === 'default.png') {
+                response.body.data.avatar = `/img/default.png`;
+            } else if (!path.test(response.body.data.avatar)) {
+                response.body.data.avatar = `${process.env.HOST}/uploads/${response.body.data.avatar}`;
+            }
         }
         return response;
     }
