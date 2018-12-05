@@ -17,8 +17,8 @@
         {{/nickname}}
         {{#admin}}
         <li class="drop-item menu-item">
-          <a href="">Manage<i class="fa fa-caret-down"></i></a>
-          <ul class="nav-sub">
+          <a id="manage">Manage<i class="fa fa-caret-down"></i></a>
+          <ul id="prelist-admin" class="nav-sub">
             <li class="sub-item"><a href="/users">Users</a></li>
             <li class="sub-item"><a href="/questions">Questions</a></li>
             <li class="sub-item"><a href="/games">Games</a></li>
@@ -27,8 +27,8 @@
         {{/admin}}
         {{#nickname}}
         <li class="drop-item menu-item">
-          <a href="">{{nickname}} <i class="fa fa-caret-down"></i></a>
-          <ul class="nav-sub">
+          <a id="user" href="">{{nickname}} <i class="fa fa-caret-down"></i></a>
+          <ul id="prelist-user" class="nav-sub">
             <li class="sub-item"><a href="/profile">Settings</a></li>
             <li class="sub-item"><a href="/game/select_adversary">Play</a></li>
             <li class="sub-item"><a href="/question/add">Add Question</a></li>

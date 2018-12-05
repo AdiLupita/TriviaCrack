@@ -322,6 +322,7 @@ select {
         display: block;
         position: inherit;
         float: none;
+        display: none;
     }
 
     .drop-item i {
