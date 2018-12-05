@@ -161,15 +161,16 @@ function apiRegister(nick, email, pass) {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    const field = msg.body.data;
-                    if (field.indexOf('nickname') > -1) {
-                        msgErrVal('msg-alert-reg', field);
-                        invalidInput(document.getElementById('new-nickname'));
-                    }
-                    if (field.indexOf('email') > -1) {
-                        msgErrVal('msg-alert-reg', field);
-                        invalidInput(document.getElementById('new-email'));
-                    }
+                    // const field = msg.body.data;
+                    // if (field.indexOf('nickname') > -1) {
+                    //     msgErrVal('msg-alert-reg', field);
+                    //     invalidInput(document.getElementById('new-nickname'));
+                    // }
+                    // if (field.indexOf('email') > -1) {
+                    //     msgErrVal('msg-alert-reg', field);
+                    //     invalidInput(document.getElementById('new-email'));
+                    // }
+                        msgErrVal('msg-alert-reg', 'This user/email already exist.');
                 });
             }
         });
