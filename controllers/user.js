@@ -9,7 +9,7 @@ class User {
         const result = await MdlUser.login(req);
         if (result.statusCode === 200) {
             const profile = await MdlUser.getProfile(nickname, result.body.token);
-            res.cookie('token', result.body.token);
+            res.cookie('token', result.body.token, { expires: new Date(Date.now() + 900000) });
             res.cookie('nickname', nickname);
             res.cookie('admin', profile.body.data.admin);
             res.cookie('id', profile.body.data.id);
@@ -110,8 +110,10 @@ class User {
                 emails: [result.body.data],
             };
             const html = Mustache.to_html(template, data).toString();
-            console.log(result.body.data);
-            res.send({ body: html });
+            res.send({
+                statusCode: result.statusCode,
+                body: html
+            });
         } else {
             res.status(result.statusCode).send(result);
         }

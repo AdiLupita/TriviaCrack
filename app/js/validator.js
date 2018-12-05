@@ -230,33 +230,41 @@ function apiAddEmail(email) {
     const body = new URLSearchParams(data).toString()
     API.post('/profile/add_emails', body, header)
         .then((res) => {
-            if (res.status === 200) {
-                res.json()
-                    .then((r) => {
+            res.json()
+                .then((r) => {
+                    if (r.statusCode === 200) {
                         const newDiv = document.createElement('div')
                         newDiv.innerHTML = r.body;
                         const newForm = newDiv.children[0];
+                        const btn = newForm.getElementsByClassName('btn-icon')[0];
                         document.getElementById('list-emails').appendChild(newForm);
+                        btn.addEventListener('click', validateRemoveEmailForms);
                         document.getElementById('inp-add-email').value = '';
-                    })
-            } else {
-                invalidInput(document.getElementById('inp-add-email'));
-            }
+                    } else {
+                        msgErrVal('msg-alert-email', r.body.data);
+                        invalidInput(document.getElementById('inp-add-email'));
+                    }
+
+                });
         });
 }
 
 function validateAddEmailData() {
     const inpAdd = document.getElementById('inp-add-email');
     let correct = true;
+    let msg = '';
     if (!valEmail(inpAdd.value)) {
         invalidInput(inpAdd);
         correct = false;
+        msg = MSG_INVAL_EMAIL;
     } else {
         validInput(inpAdd);
     }
     if (correct) {
-        // console.log('piu');
         apiAddEmail(inpAdd.value);
+        msgErrValHide('msg-alert-email');
+    } else {
+        msgErrVal('msg-alert-email', msg);
     }
 }
 
@@ -318,13 +326,11 @@ function apiAddQuestion(category, question, opc1, opc2, opcC) {
     API.post('/question/add', body, header)
         .then((res) => {
             if (res.status === 200) {
-                window.alert('Question created');
                 document.getElementById('form-add-question').reset();
             } else {
                 res.json()
                     .then((r) => {
-                        invalidInput(document.getElementById('txt-a-question'));
-                        window.alert(r.body.data);
+                        msgErrVal('msg-alert-question', r.body.data);
                     });
             }
         });
@@ -337,39 +343,48 @@ function validateAddQuestionData() {
     const inpOpc2 = document.getElementById('inp-opcion-2');
     const inpOpcC = document.getElementById('inp-opcion-c');
     var correct = true;
+    const msg = [];
     if (!valId(slcCategory.value)) {
         invalidInput(slcCategory);
         correct = false;
+        msg.push('Invalid category');
     } else {
         validInput(slcCategory);
     }
     if (!valText(txtArea.value)) {
         invalidInput(txtArea);
         correct = false;
+        msg.push(`${MSG_INVAL_TEXT} in question`);
     } else {
         validInput(txtArea);
     }
     if (!valText(inpOpc1.value)) {
         invalidInput(inpOpc1);
         correct = false;
+        msg.push(`${MSG_INVAL_TEXT} in option 1`);
     } else {
         validInput(inpOpc1);
     }
     if (!valText(inpOpc2.value)) {
         invalidInput(inpOpc2);
         correct = false;
+        msg.push(`${MSG_INVAL_TEXT} in option 2`);
     } else {
         validInput(inpOpc2);
     }
     if (!valText(inpOpcC.value)) {
         invalidInput(inpOpcC);
         correct = false;
+        msg.push(`${MSG_INVAL_TEXT} in option correct`);
     } else {
         validInput(inpOpcC);
     }
     if (correct) {
         apiAddQuestion(slcCategory.value, txtArea.value,
             inpOpc1.value, inpOpc2.value, inpOpcC.value);
+        msgErrValHide('msg-alert-question');
+    } else {
+        msgErrVal('msg-alert-question', msg.join(', '));
     }
 }
 
