@@ -44,12 +44,12 @@ class User {
         return response;
     }
 
-    async getEmails(nickname, token) {
+    async getEmails(nickname, token, params) {
         const header = {
             token: token,
           };
           const url = `${process.env.HOST}/users/${nickname}/emails`;
-        const response = await API.getMethod(url, header)
+        const response = await API.getMethod(url, header, params)
             .catch((err) => { });
         return response;
     }

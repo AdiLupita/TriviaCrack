@@ -2,11 +2,12 @@ const fetch = require('node-fetch');
 const request = require('request-promise');
 
 class API {
-    async getMethod(url = '', header = {}) {
+    async getMethod(url = '', header = {}, params = {}) {
         const options = {
             method: 'GET',
             url,
             headers: { ...header },
+            qs: { ...params },
             simple: false,
         };
         let result = {};

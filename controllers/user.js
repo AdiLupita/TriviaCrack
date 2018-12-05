@@ -96,10 +96,17 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const email_list = fs.readFileSync('public/partials/email_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
-        const listEmails = await MdlUser.getEmails(req.cookies.nickname, req.cookies.token);
+        const listEmails = await MdlUser.getEmails(req.cookies.nickname, req.cookies.token, req.query);
+        const pages = [];
+        if (listEmails.body.pages) {
+            for (let i = 1; i <= listEmails.body.pages; i++) {
+                pages.push({ page: i });
+            }
+        }
         const data = {
             nickname: req.cookies.nickname,
             emails: listEmails.body.data,
+            pages,
         };
         const html = Mustache.to_html(template, data, { menu, footer, email_list });
         res.send(html);
