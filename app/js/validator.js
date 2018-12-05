@@ -301,7 +301,8 @@ function apiRemoveEmail() {
 
 function validateRemoveEmailForms() {
     try {
-        const buttons = document.getElementsByClassName('btn-icon');
+        const listBtns = document.getElementsByClassName('email-list');
+        const buttons = listBtns.getElementsByClassName('btn-icon');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', apiRemoveEmail);
         }
@@ -394,4 +395,19 @@ function validateAddQuestionForm() {
         btn.addEventListener('click', validateAddQuestionData);
     } catch (error) {
     }
+}
+
+window.addEventListener('load', validateAddFriendsForm);
+
+function apiAddFriend(friend) {
+
+}
+
+function validateAddFriendsData() {
+    console.log('validando');
+}
+
+function validateAddFriendsForm() {
+    const btn = document.getElementById('btn-add-friend');
+    btn.addEventListener('click', validateAddFriendsData);
 }
