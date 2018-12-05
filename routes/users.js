@@ -7,6 +7,7 @@ router.post('/register', CtrlUser.register);
 router.get('/logout', CtrlUser.logout);
 router.get('/profile', CtrlUser.profilePage);
 router.post('/profile/friends', CtrlUser.addFriend);
+router.delete('/profile/friends', CtrlUser.removeFriend);
 router.get('/profile/edit', CtrlUser.profileEditPage);
 router.get('/profile/add_emails', CtrlUser.addEmailsPage);
 router.post('/profile/add_emails', CtrlUser.addEmail);

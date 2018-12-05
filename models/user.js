@@ -122,6 +122,16 @@ class User {
         return response;
     }
 
+    async removeFriend(nickname, friend, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}/friends/${friend}`;
+        const response = await API.delMethod(url, friend, header)
+            .catch((err) => { });
+        return response;
+    }
+
     async getAll(token, page) {
         const header = {
             token: token,

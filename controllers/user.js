@@ -87,6 +87,11 @@ class User {
         }
     }
 
+    async removeFriend(req, res){
+        const result = await MdlUser.removeFriend(req.cookies.nickname, req.body.friend, req.cookies.token);
+        res.status(result.statusCode).send(result);
+    }
+
     async profileEditPage(req, res) {
         const template = fs.readFileSync('public/views/profile_edit.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();

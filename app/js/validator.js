@@ -476,7 +476,7 @@ window.addEventListener('load', validateEditProfileForm);
 
 
 function apiEditProfile() {
-    console.log('not implemented');
+    console.log('Edit profile not implemented');
 }
 
 function validateEditProfileData() {
@@ -528,10 +528,29 @@ function validateEditProfileForm() {
 window.addEventListener('load', validatePlayForm);
 
 function apiRemoveFriend() {
-    console.log('Remove not implemented');
+    var parent = this.parentNode;
+    var li = parent.parentNode.parentNode;
+    var ul = document.getElementById('list-friends');
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        friend: this.value,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.delete('/profile/friends', body, header)
+        .then((res) => {
+            if (res.status === 204) {
+                ul.removeChild(li);
+                msgErrValHide('msg-alert-rm-friend');
+            } else {
+                msgErrVal('msg-alert-rm-friend', 'Something unexpected happened');
+            }
+        });
 }
 
 function apiPlay() {
+    console.log(this.value);
     console.log('play not implemented');
 }
 
