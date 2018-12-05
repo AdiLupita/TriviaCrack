@@ -415,8 +415,34 @@ function validateAddQuestionForm() {
 
 window.addEventListener('load', validateAddFriendsForm);
 
-function apiAddFriend() {
-    console.log('Not implemented');
+function apiAddFriend(friend) {
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        friend,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.post('/profile/friends', body, header)
+        .then((res) => {
+            res.json()
+                .then((r) => {
+                    if (r.statusCode === 200) {
+                        const auxUl = document.createElement('ul');
+                        auxUl.innerHTML = r.body;
+                        const li = auxUl.children[0];
+                        document.getElementById('list-friends').appendChild(li);
+                        const btns = li.getElementsByClassName('btn-icon');
+                        btns[0].addEventListener('click', apiPlay);
+                        btns[1].addEventListener('click', apiRemoveFriend);
+                        document.getElementById('inp-nick-friend').value = '';
+                    } else {
+                        msgErrVal('msg-alert-add-friend', r.body.error);
+                        invalidInput(document.getElementById('inp-add-email'));
+                    }
+
+                });
+        });
 }
 
 function validateAddFriendsData() {
@@ -432,7 +458,7 @@ function validateAddFriendsData() {
     }
     if (correct) {
         msgErrValHide('msg-alert-add-friend');
-        apiAddFriend();
+        apiAddFriend(inpFriend.value);
     } else {
         msgErrVal('msg-alert-add-friend', msg);
     }

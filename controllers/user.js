@@ -51,6 +51,7 @@ class User {
         const friends = fs.readFileSync('public/partials/friend_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const profile = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
+        const friendsList = await MdlUser.getFriends(req.cookies.nickname, req.cookies.token);
         let manage;
         if (req.cookies.admin == 'true') {
             manage = true;
@@ -62,23 +63,28 @@ class User {
             avatar: profile.body.data.avatar,
             admin: manage,
             personal: true,
-            friends: [
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                },
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                },
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                }
-            ]
+            friends: friendsList.body.data,
         };
         const html = Mustache.to_html(template, data, { menu, footer, friends });
         res.send(html);
+    }
+
+    async addFriend(req, res){
+        const result = await MdlUser.addFriend(req.cookies.nickname, req.body.friend, req.cookies.token);
+        if (result.statusCode === 200) {
+            const template = fs.readFileSync('public/partials/friend.mst').toString();
+            const data = {
+                ...result.body.data,
+                personal: true,
+            };
+            const html = Mustache.to_html(template, data).toString();
+            res.send({
+                statusCode: result.statusCode,
+                body: html
+            });
+        } else {
+            res.status(result.statusCode).send(result);
+        }
     }
 
     async profileEditPage(req, res) {

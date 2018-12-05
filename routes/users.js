@@ -6,9 +6,7 @@ router.post('/login', CtrlUser.login);
 router.post('/register', CtrlUser.register);
 router.get('/logout', CtrlUser.logout);
 router.get('/profile', CtrlUser.profilePage);
-router.post('/profile', function(req, res){
-    res.send('Not implemented')
-});
+router.post('/profile/friends', CtrlUser.addFriend);
 router.get('/profile/edit', CtrlUser.profileEditPage);
 router.get('/profile/add_emails', CtrlUser.addEmailsPage);
 router.post('/profile/add_emails', CtrlUser.addEmail);
