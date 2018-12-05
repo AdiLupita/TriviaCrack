@@ -51,11 +51,16 @@ class User {
         const friends = fs.readFileSync('public/partials/friend_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const profile = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const data = {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             avatar: profile.body.data.avatar,
+            admin: manage,
             personal: true,
             friends: [
                 {
@@ -81,11 +86,16 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const profile = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const data = {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             password: 'default',
             avatar: profile.body.data.avatar,
+            admin: manage,
         };
         const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
@@ -98,15 +108,20 @@ class User {
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const listEmails = await MdlUser.getEmails(req.cookies.nickname, req.cookies.token, req.query);
         const pages = [];
+        let manage;
         if (listEmails.body.pages) {
             for (let i = 1; i <= listEmails.body.pages; i++) {
                 pages.push({ page: i });
             }
         }
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const data = {
             nickname: req.cookies.nickname,
             emails: listEmails.body.data,
             pages,
+            admin: manage,
         };
         const html = Mustache.to_html(template, data, { menu, footer, email_list });
         res.send(html);
@@ -135,22 +150,15 @@ class User {
 
     }
 
-    async getUsers(req, res) {
-        const template = fs.readFileSync('public/views/users/index.mst').toString();
-        const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menuadmin = fs.readFileSync('public/partials/menu_admin.mst').toString();
-        const footer = fs.readFileSync('public/partials/footer.mst').toString();
-        const data = {
-        };
-        const html = Mustache.to_html(template, data, { menu, menuadmin, footer });
-        res.send(html);
-    }
-
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/users/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         let page = 1;
         if (req.query !== undefined && req.query.page !== undefined) {
             page = req.query.page;
@@ -162,6 +170,7 @@ class User {
         }
         const data = {
             nickname: req.cookies.nickname,
+            admin: manage,
             items: result.body.data,
         };
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
@@ -174,12 +183,17 @@ class User {
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const delete_modal = fs.readFileSync('public/partials/delete_modal.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             personal: true,
+            admin: manage,
             route: 'users',
             emails: [
                 {
@@ -202,12 +216,17 @@ class User {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             personal: true,
+            admin: manage,
         };
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
         res.send(html);
