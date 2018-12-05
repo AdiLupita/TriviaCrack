@@ -9,7 +9,7 @@ class User {
         const result = await MdlUser.login(req);
         if (result.statusCode === 200) {
             const profile = await MdlUser.getProfile(nickname, result.body.token);
-            res.cookie('token', result.body.token, { expires: new Date(Date.now() + 900000) });
+            res.cookie('token', result.body.token);
             res.cookie('nickname', nickname);
             res.cookie('admin', profile.body.data.admin);
             res.cookie('id', profile.body.data.id);
@@ -55,6 +55,7 @@ class User {
             nickname: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
+            avatar: profile.body.data.avatar,
             personal: true,
             friends: [
                 {
@@ -79,10 +80,12 @@ class User {
         const template = fs.readFileSync('public/views/profile_edit.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const profile = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
         const data = {
-            nickname: req.cookies.nickname,
-            email: 'asas@gmail.com',
-            password: 'asasdasd',
+            nickname: profile.body.data.nickname,
+            email: profile.body.data.email,
+            password: 'default',
+            avatar: profile.body.data.avatar,
         };
         const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);

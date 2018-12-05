@@ -48,6 +48,10 @@
   background: var(--complementary-color);
 }
 
+.btn-r {
+  float: right;
+}
+
 .btn-a {
   text-decoration: none;
   background: var(--constrast-color);
