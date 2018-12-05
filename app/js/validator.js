@@ -74,9 +74,7 @@ function apiLogin(nick, pass) {
             if (res.status === 200) {
                 window.location = res.url;
             } else {
-                res.json().then((msg) => {
-                    msgErrVal('msg-alert-log', msg.body.data.message);
-                });
+                msgErrVal('msg-alert-log', 'User/password combination is not valid');
             }
         })
 }
@@ -170,7 +168,7 @@ function apiRegister(nick, email, pass) {
                     //     msgErrVal('msg-alert-reg', field);
                     //     invalidInput(document.getElementById('new-email'));
                     // }
-                        msgErrVal('msg-alert-reg', 'This user/email already exist.');
+                    msgErrVal('msg-alert-reg', 'This user/email already exist.');
                 });
             }
         });
