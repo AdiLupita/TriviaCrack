@@ -75,7 +75,7 @@ function apiLogin(nick, pass) {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    msgErrVal('msg-alert-log', msg.body.data);
+                    msgErrVal('msg-alert-log', msg.body.data.message);
                 });
             }
         })
@@ -127,7 +127,7 @@ function apiLogout() {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    window.alert(msg.body.data)
+                    window.alert(msg.body.data.message)
                 });
             }
         });
@@ -241,7 +241,7 @@ function apiAddEmail(email) {
                         btn.addEventListener('click', validateRemoveEmailForms);
                         document.getElementById('inp-add-email').value = '';
                     } else {
-                        msgErrVal('msg-alert-email', r.body.data);
+                        msgErrVal('msg-alert-email', r.body.error);
                         invalidInput(document.getElementById('inp-add-email'));
                     }
 
@@ -293,7 +293,7 @@ function apiRemoveEmail() {
             if (res.status === 204) {
                 supParen.removeChild(parent);
             } else {
-                window.alert('something unexpected happened');
+                msgErrVal('msg-alert-email', 'Something unexpected happened');
             }
         })
 
