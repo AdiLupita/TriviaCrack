@@ -17,6 +17,10 @@ h3.msg-delete {
 
 /* line */
 
+.right{
+    text-align: right;
+}
+
 hr{
     align: left;
     width: 95%;
@@ -28,9 +32,6 @@ span.menu-item {
     cursor: pointer;
     cursor: hand;
     padding: 15px 5px 5px 3px;
-}
-.hide-filter {
-    display: none;
 }
 
 .filter {
