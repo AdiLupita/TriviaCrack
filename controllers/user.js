@@ -14,8 +14,8 @@ class User {
             res.cookie('admin', profile.body.data.admin);
             res.cookie('id', profile.body.data.id);
             res.redirect('/profile');
-        } else if (result.statusCode === 409) {
-            res.status(409).send(result);
+        } else {
+            res.status(result.statusCode).send(result);
         }
     }
 

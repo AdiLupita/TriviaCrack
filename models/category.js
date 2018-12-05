@@ -5,7 +5,7 @@ class Category {
         const header = {
             token: token,
         };
-        const url = `${process.env.HOST}/questions`;
+        const url = `${process.env.HOST}/categories`;
         const response = await API.getMethod(url, header)
             .catch((err) => { });
         return response;

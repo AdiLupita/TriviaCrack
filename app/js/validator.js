@@ -74,9 +74,7 @@ function apiLogin(nick, pass) {
             if (res.status === 200) {
                 window.location = res.url;
             } else {
-                res.json().then((msg) => {
-                    msgErrVal('msg-alert-log', msg.body.data);
-                });
+                msgErrVal('msg-alert-log', 'User/password combination is not valid');
             }
         })
 }
@@ -127,7 +125,7 @@ function apiLogout() {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    window.alert(msg.body.data)
+                    window.alert(msg.body.data.message)
                 });
             }
         });
@@ -161,15 +159,16 @@ function apiRegister(nick, email, pass) {
                 window.location = res.url;
             } else {
                 res.json().then((msg) => {
-                    const field = msg.body.data;
-                    if (field.indexOf('nickname') > -1) {
-                        msgErrVal('msg-alert-reg', field);
-                        invalidInput(document.getElementById('new-nickname'));
-                    }
-                    if (field.indexOf('email') > -1) {
-                        msgErrVal('msg-alert-reg', field);
-                        invalidInput(document.getElementById('new-email'));
-                    }
+                    // const field = msg.body.data;
+                    // if (field.indexOf('nickname') > -1) {
+                    //     msgErrVal('msg-alert-reg', field);
+                    //     invalidInput(document.getElementById('new-nickname'));
+                    // }
+                    // if (field.indexOf('email') > -1) {
+                    //     msgErrVal('msg-alert-reg', field);
+                    //     invalidInput(document.getElementById('new-email'));
+                    // }
+                    msgErrVal('msg-alert-reg', 'This user/email already exist.');
                 });
             }
         });
@@ -241,7 +240,7 @@ function apiAddEmail(email) {
                         btn.addEventListener('click', validateRemoveEmailForms);
                         document.getElementById('inp-add-email').value = '';
                     } else {
-                        msgErrVal('msg-alert-email', r.body.data);
+                        msgErrVal('msg-alert-email', r.body.error);
                         invalidInput(document.getElementById('inp-add-email'));
                     }
 
@@ -293,7 +292,7 @@ function apiRemoveEmail() {
             if (res.status === 204) {
                 supParen.removeChild(parent);
             } else {
-                window.alert('something unexpected happened');
+                msgErrVal('msg-alert-email', 'Something unexpected happened');
             }
         })
 
