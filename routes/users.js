@@ -18,7 +18,7 @@ router.delete('/profile/add_emails', CtrlUser.removeEmail);
 router.get('/users', CtrlUser.indexPage);
 router.get('/users/:nickname', CtrlUser.showPage);
 router.get('/users/edit/:nickname', CtrlUser.editPage);
-router.post('/users/edit/:nickname', CtrlUser.editUser);
-router.get('/users/delete/:nickname', CtrlUser.deleteUser);
+router.patch('/users/edit/:nickname', CtrlUser.editUser);
+router.delete('/users/delete/:nickname', CtrlUser.deleteUser);
 
 module.exports = router;
