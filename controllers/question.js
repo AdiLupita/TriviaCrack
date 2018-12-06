@@ -118,6 +118,7 @@ class Question {
             admin: manage,
             route: 'questions',
             data: result.body.data,
+            approved: result.body.data.approved,
         };
         const html = Mustache.to_html(template, data, { menu, footer, delete_modal });
         res.send(html);
