@@ -1,8 +1,22 @@
 window.addEventListener('load', validateEditProfileForm);
 
-
-function apiEditProfile() {
-    console.log('Edit profile not implemented');
+function apiEditProfile(fields) {
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = { ...fields };
+    const body = new URLSearchParams(data).toString()
+    API.patch('/profile/edit', body, header)
+        .then((result) => {
+            if (result.status === 204) {
+                window.location.reload();
+            } else {
+                result.json()
+                    .then((res) => {
+                        msgErrVal('msg-alert-edit-profile', res.body.error);
+                    });
+            }
+        });
 }
 
 function validateEditProfileData() {
@@ -35,8 +49,22 @@ function validateEditProfileData() {
         }
     }
     if (correct) {
+        let modified = false;
         msgErrValHide('msg-alert-edit-profile');
-        apiEditProfile();
+        const fields = {};
+        if (inpEmail.getAttribute('data-origin-val') !== inpEmail.value) {
+            fields.email = inpEmail.value;
+            modified = true;
+        }
+        if (inpPass.getAttribute('data-origin-val') !== inpPass.value) {
+            fields.password = inpPass.value;
+            modified = true;
+        }
+        if (modified) {
+            apiEditProfile(fields);
+        }else{
+            msgErrVal('msg-alert-edit-profile', 'No data modified.');
+        }
     } else {
         msgErrVal('msg-alert-edit-profile', msg.join(', '));
     }
@@ -47,6 +75,5 @@ function validateEditProfileForm() {
         const btn = document.getElementById('btn-edit-profile');
         btn.addEventListener('click', validateEditProfileData);
     } catch (error) {
-
     }
 }

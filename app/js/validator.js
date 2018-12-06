@@ -60,4 +60,3 @@ function valFile(data) {
 function valEmail(data) {
     return (VALITATIONS.email.test(data))
 }
-

@@ -134,6 +134,16 @@ class User {
         return response;
     }
 
+    async updateUser(nickname, body, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}`;
+        const response = await API.patchMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
+
     async getAll(token, page) {
         const header = {
             token: token,
