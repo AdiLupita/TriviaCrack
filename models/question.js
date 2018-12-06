@@ -11,6 +11,16 @@ class Question {
         return response;
     }
 
+    async getRand(token, params){
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/questions`;
+        const response = await API.getMethod(url, header, params)
+            .catch((err) => { });
+        return response;
+    }
+
     async getQuestion(id, token) {
         const header = {
             token: token,

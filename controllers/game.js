@@ -57,7 +57,7 @@ class Game {
         const qs = { random: true };
         const result = await MdlCategory.getCategories(token, qs);
         if (result.statusCode === 200) {
-            res.cookie('category', result.body.data.id);
+            res.cookie('category', result.body.data.name);
         }
         res.redirect('/question');
     }
