@@ -31,17 +31,17 @@ class Question {
         return response;
     }
 
-    async editQuestion(id, token,  req) {
+    async updateQuestion(id, body, token) {
         const header = {
             token: token,
-          };
+        };
         const url = `${process.env.HOST}/questions/${id}`;
-        const response = await API.patchMethod(url, req.body, header)
+        const response = await API.patchMethod(url, body, header)
             .catch((err) => { });
         return response;
     }
 
-    async deleteQuestion(id, token) {
+    async removeQuestion(id, token) {
         const header = {
             token: token,
         };
