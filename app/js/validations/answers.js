@@ -32,7 +32,6 @@ function nextViewGame(num) {
 }
 
 function apiAnswer() {
-    console.log('asda');
     const option = this.value;
     const header = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -41,6 +40,7 @@ function apiAnswer() {
         option,
     };
     const body = new URLSearchParams(data).toString()
+    dissableBtnsQuestion();
     API.post('/answer', body, header)
         .then((res) => {
             res.json()
@@ -50,7 +50,6 @@ function apiAnswer() {
                     const correct = r.body.data.correct;
                     showResultAnswer(correct);
                     nextViewGame(num);
-                    dissableBtnsQuestion();
                 });
         });
 }

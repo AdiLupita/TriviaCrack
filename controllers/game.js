@@ -57,7 +57,7 @@ class Game {
         res.send(html);
     }
 
-    async selectGameMode(req, res){
+    async selectGameMode(req, res) {
         const template = fs.readFileSync('public/views/game_mode.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
@@ -77,6 +77,20 @@ class Game {
         const player1 = req.cookies.nickname;
         const player2 = req.body.player2;
         const token = req.cookies.token;
+        const result = await MdlGame.createGame(player1, player2, token);
+        if (result.statusCode === 200) {
+            res.cookie('idgame', result.body.data.id);
+            res.redirect('roulette');
+        } else {
+            res.status(result.statusCode).send(result);
+        }
+    }
+
+    async createGameRandom(req, res) {
+        const player1 = req.cookies.nickname;
+        const token = req.cookies.token;
+        const usrRan = await MdlUser.getAll(token, { random: true });
+        const player2 = usrRan.body.data.nickname;
         const result = await MdlGame.createGame(player1, player2, token);
         if (result.statusCode === 200) {
             res.cookie('idgame', result.body.data.id);
