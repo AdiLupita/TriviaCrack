@@ -196,6 +196,7 @@ class User {
             items: result.body.data,
             pages: [{ page: page}],
             actual: page,
+            route: 'users',
         };
         const html = Mustache.to_html(template, data, { menu, footer, tfoot });
         res.send(html);
@@ -235,7 +236,7 @@ class User {
         }
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
-            nickaname: req.params.nickname,
+            nickname: req.params.nickname,
             nickname_user: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
@@ -248,13 +249,12 @@ class User {
     }
 
     async editUser(req, res) {
-      console.log(req.params.nickname);
-      const result = await MdlUser.updateUser(req.params.nickname, req.body, req.cookies.token);
-      if (result.statusCode === 204) {
-          res.status(204).send();
-      } else {
-          res.status(result.statusCode).send(result);
-      }
+        const result = await MdlUser.updateUser(req.params.nickname, req.body, req.cookies.token);
+        if (result.statusCode === 204) {
+            res.status(204).send();
+        } else {
+            res.status(result.statusCode).send(result);
+        }
     }
 
     async deleteUser(req, res) {

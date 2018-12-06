@@ -1,9 +1,9 @@
-windows.addEventListener('click', loadingDelete);
+window.addEventListener('click', loadingDelete);
 
 function loadingDelete() {
     try {
-        const delete = document.getElementById('delete');
-        delete.addEventListener('click', apiRemoveFriend);
+        const deleteElement = document.getElementById('delete');
+        deleteElement.addEventListener('click', apiRemoveFriend);
     }
     catch(e) {}
 }

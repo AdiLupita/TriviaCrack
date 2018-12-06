@@ -86,7 +86,7 @@ class Question {
             nickname: req.cookies.nickname,
             admin: manage,
             pages: [{ page: page}],
-            items: result.body.data,            
+            items: result.body.data,
             categories: categories.body.data,
             actual: page,
         };
@@ -97,7 +97,6 @@ class Question {
     async showPage(req, res) {
         const template = fs.readFileSync('public/views/questions/show.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const delete_modal = fs.readFileSync('public/partials/delete_modal.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
@@ -111,14 +110,13 @@ class Question {
             route: 'questions',
             data: result.body.data,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, delete_modal });
+        const html = Mustache.to_html(template, data, { menu, footer, delete_modal });
         res.send(html);
     }
 
     async editPage(req, res) {
         const template = fs.readFileSync('public/views/questions/edit.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
         if (req.cookies.admin == 'true') {
@@ -132,11 +130,18 @@ class Question {
             data: result.body.data,
             categories: categories.body.data,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
+        const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
     }
 
     async editQuestion(req, res) {
+        console.log(req.body);
+        const result = await MdlQuestion.updateQuestion(req.params.id, req.body, req.cookies.token);
+        if (result.statusCode === 204) {
+            res.status(204).send();
+        } else {
+            res.status(result.statusCode).send(result);
+        }
     }
 
     async deleteQuestion(req, res) {
