@@ -141,6 +141,26 @@ class Game {
         const html = Mustache.to_html(template, data, { menu, footer, tfoot });
         res.send(html);
     }
+
+    async showPage(req, res) {
+        const template = fs.readFileSync('public/views/games/show.mst').toString();
+        const menu = fs.readFileSync('public/partials/menu.mst').toString();
+        const delete_modal = fs.readFileSync('public/partials/delete_modal.mst').toString();
+        const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
+        const result = await MdlGame.getGame(req.params.id, req.cookies.token);
+        const data = {
+            nickname: req.cookies.nickname,
+            admin: manage,
+            route: 'games',
+            data: result.body.data,
+        };
+        const html = Mustache.to_html(template, data, { menu, footer, delete_modal });
+        res.send(html);
+    }
 }
 
 module.exports = new Game();

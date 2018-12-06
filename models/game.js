@@ -23,6 +23,16 @@ class Game {
             .catch((err) => { });
         return response;
     }
+
+    async getGame(id, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/games/${id}`;
+        const response = await API.getMethod(url, header)
+            .catch((err) => { });
+        return response;
+    }
 }
 
 module.exports = new Game();
