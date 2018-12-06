@@ -39,6 +39,40 @@ class Game {
         res.send(html);
     }
 
+    async gameFinishPage(req, res) {
+        const template = fs.readFileSync('public/views/finish_game.mst').toString();
+        const menu = fs.readFileSync('public/partials/menu.mst').toString();
+        const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const user = await MdlUser.getProfile(req.cookies.nickname, req.cookies.token);
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
+        const data = {
+            nickname: req.cookies.nickname,
+            admin: manage,
+            score: user.body.data.score,
+        };
+        const html = Mustache.to_html(template, data, { menu, footer });
+        res.send(html);
+    }
+
+    async selectGameMode(req, res){
+        const template = fs.readFileSync('public/views/game_mode.mst').toString();
+        const menu = fs.readFileSync('public/partials/menu.mst').toString();
+        const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        let manage;
+        if (req.cookies.admin == 'true') {
+            manage = true;
+        }
+        const data = {
+            nickname: req.cookies.nickname,
+            admin: manage,
+        };
+        const html = Mustache.to_html(template, data, { menu, footer });
+        res.send(html);
+    }
+
     async createGame(req, res) {
         const player1 = req.cookies.nickname;
         const player2 = req.body.player2;
@@ -73,7 +107,7 @@ class Game {
             manage = true;
         }
         const result = await MdlGame.getAll(req.cookies.token, req.query);
-        if(result.body.pages == undefined){
+        if (result.body.pages == undefined) {
             res.redirect('/users');
         }
         if (result.statusCode !== 200) {
@@ -87,7 +121,7 @@ class Game {
         const data = {
             nickname: req.cookies.nickname,
             admin: manage,
-            pages: [{ page: page}],
+            pages: [{ page: page }],
             actual: page,
             items: result.body.data,
         };

@@ -42,6 +42,15 @@ class Question {
         res.send(html);
     }
 
+    async answerQuestion(req, res) {
+        const game = req.cookies.idgame;
+        const question = req.cookies.question;
+        const option = req.body.option;
+        const token = req.cookies.token;
+        const result = await MdlQuestion.addAnswer(game, question, option, token);
+        res.send(result);
+    }
+
     async addQuestionPage(req, res) {
         const template = fs.readFileSync('public/views/add_question.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
@@ -71,7 +80,7 @@ class Question {
             manage = true;
         }
         const result = await MdlQuestion.getAll(req.cookies.token, req.query);
-        if(result.body.pages == undefined){
+        if (result.body.pages == undefined) {
             res.redirect('/users');
         }
         if (result.statusCode !== 200) {
@@ -85,7 +94,7 @@ class Question {
         const data = {
             nickname: req.cookies.nickname,
             admin: manage,
-            pages: [{ page: page}],
+            pages: [{ page: page }],
             items: result.body.data,
             actual: page,
         };

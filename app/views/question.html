@@ -33,17 +33,23 @@
                     </div>
                     <div class="question">
                         <p>{{question}}</p>
-                        <form action="">
-                            <button class="btn-option">
+                        <form action="" id="answer-options">
+                            <button type="button" name="option" class="btn-option" value="{{opc1}}">
                                 {{opc1}}
                             </button>
-                            <button class="btn-option">
+                            <button type="button" name="option" class="btn-option" value="{{opc2}}">
                                 {{opc2}}
                             </button>
-                            <button class="btn-option">
+                            <button type="button" name="option" class="btn-option" value="{{opc3}}">
                                 {{opc3}}
                             </button>
                         </form>
+                    </div>
+                    <div id="msg-result-answer" class="answer-res">
+                    </div>
+                    <div id="btn-game-flow">
+                        <a id="btn-next-quest" class="btn-play ans-flow" href="/game/roulette">Next cuestion</a>
+                        <a id="btn-finish-game" class="btn-play ans-flow" href="/game/finish">Finish</a>
                     </div>
                 </div>
             </div>
