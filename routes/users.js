@@ -19,6 +19,6 @@ router.get('/users', CtrlUser.indexPage);
 router.get('/users/:nickname', CtrlUser.showPage);
 router.get('/users/edit/:nickname', CtrlUser.editPage);
 router.patch('/users/edit/:nickname', CtrlUser.editUser);
-router.get('/users/delete/:nickname', CtrlUser.deleteUser);
+router.delete('/users/delete/:nickname', CtrlUser.deleteUser);
 
 module.exports = router;

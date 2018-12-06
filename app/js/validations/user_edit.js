@@ -1,12 +1,12 @@
 window.addEventListener('load', validateEditUserForm);
 
-function apiEditUser(fields) {
+function apiEditUser(fields, nickname) {
     const header = {
         "Content-Type": "application/x-www-form-urlencoded",
     }
     const data = { ...fields };
     const body = new URLSearchParams(data).toString()
-    API.patch('/users/edit/', body, header)
+    API.patch(`/users/edit/${nickname}`, body, header)
         .then((result) => {
             if (result.status === 204) {
                 window.location.reload();
@@ -19,10 +19,10 @@ function apiEditUser(fields) {
         });
 }
 
-function validateEditProfileData() {
-    const inpEmail = document.getElementById('inp-new-email');
-    const inpPass = document.getElementById('inp-new-pass');
-    const inpFile = document.getElementById('inp-file-avatar');
+function validateEditUserData() {
+    const inpEmail = document.getElementById('inp-new-email-user');
+    const inpPass = document.getElementById('inp-new-pass-user');
+    const inpFile = document.getElementById('inp-file-avatar-user');
     let correct = true;
     const msg = [];
     if (!valEmail(inpEmail.value)) {
@@ -61,7 +61,8 @@ function validateEditProfileData() {
             modified = true;
         }
         if (modified) {
-            apiEditProfile(fields);
+            const nickname = document.getElementById('nickname-user-edit');
+            apiEditUser(fields, nickname.textContent);
         }else{
             msgErrVal('msg-alert-edit-user', 'No data modified.');
         }

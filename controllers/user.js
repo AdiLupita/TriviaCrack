@@ -172,7 +172,6 @@ class User {
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/users/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const tfoot = fs.readFileSync('public/partials/tfoot.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
@@ -198,7 +197,7 @@ class User {
             pages: [{ page: page}],
             actual: page,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, tfoot });
+        const html = Mustache.to_html(template, data, { menu, footer, tfoot });
         res.send(html);
     }
 
@@ -220,7 +219,6 @@ class User {
             score: profile.body.data.score,
             personal: true,
             admin: manage,
-            route: 'users',
             emails: []
         };
         const html = Mustache.to_html(template, data, { menu, footer, delete_modal, email_list });
@@ -260,13 +258,11 @@ class User {
     }
 
     async deleteUser(req, res) {
-        const result = await MdlUser.login(req);
-        if (result.statusCode === 200) {
-            const profile = await MdlUser.deleteUser(nickname, result.body.token);
+        const result = await MdlUser.deleteUser(req.params.nickname, req.cookies.token);
+        if(result.statusCode == 204) {
             res.redirect('/users');
-        } else if (result.statusCode === 409) {
-            res.status(409).send(result);
         }
+        res.status(result.statusCode).send(result);
     }
 }
 

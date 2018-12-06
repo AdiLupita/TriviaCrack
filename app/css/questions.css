@@ -6,9 +6,11 @@
 }
 
 .img-cat {
+    background: var(--complementary-color);
     max-width: 45px;
     max-height: 45px;
     margin: auto 10px;
+    padding: 3px;
 }
 
 .quest {

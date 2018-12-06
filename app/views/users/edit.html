@@ -17,7 +17,6 @@
       <link rel="shortcut icon" href="../../favicon.ico">
     <!-- endbuild -->
     <!-- build:js -->
-      <script src="../../js/validations/users_edit.js"></script>
       <scritp src="../../js/principal.js"></script>
     <!-- endbuild -->
 </head>
@@ -31,12 +30,12 @@
                   <img src="{{{avatar}}}" alt="Profile image" class="user-img">
               </div>
               <div class="col-10">
-                  <h1>{{nickname_user}}</h1>
+                  <h1 id="nickname-user-edit">{{nickname_user}}</h1>
                   <form action="" class="col-12">
                       <div id="msg-alert-edit-user" class="alert"></div>
                       <div class="div-field">
                           <label for="" class="col-1">Email</label>
-                          <input id="inp-new-email" type="email" class="col-12 txt-input" placeholder="Write a new email"
+                          <input id="inp-new-email-user" type="email" class="col-12 txt-input" placeholder="Write a new email"
                               value="{{{email}}}" data-origin-val="{{{email}}}">
                       </div>
                       <div class="div-field">
@@ -44,12 +43,12 @@
                       </div>
                       <div class="div-field">
                           <label for="" class="col-1">Password</label>
-                          <input id="inp-new-pass" type="password" class="col-12 txt-input" placeholder="Write a new Password"
+                          <input id="inp-new-pass-user" type="password" class="col-12 txt-input" placeholder="Write a new Password"
                               value="{{{password}}}" data-origin-val="{{{password}}}">
                       </div>
                       <div class="div-field">
                           <label for="" class="col-1">Avatar</label>
-                          <input id="inp-file-avatar" type="file" name="file" class="col-12 btn-file" accept=".png, .jpg, .jpeg">
+                          <input id="inp-file-avatar-user" type="file" name="file" class="col-12 btn-file" accept=".png, .jpg, .jpeg">
                       </div>
                       <div class="div-field">
                           <button id="btn-edit-user" type="button" class="btn-submit">Update</button>

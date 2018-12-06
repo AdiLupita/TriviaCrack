@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Mustache = require('mustache');
-const { MdlUser, MdlGame } = require('../models');
+const { MdlUser, MdlGame, MdlCategory } = require('../models');
 
 class Game {
     async selectAdversaryPage(req, res) {
@@ -44,12 +44,22 @@ class Game {
         const player2 = req.body.player2;
         const token = req.cookies.token;
         const result = await MdlGame.createGame(player1, player2, token);
-        if(result.statusCode === 200){
+        if (result.statusCode === 200) {
             res.cookie('idgame', result.body.data.id);
             res.redirect('roulette');
-        }else{
+        } else {
             res.status(result.statusCode).send(result);
         }
+    }
+
+    async getRandomCategory(req, res) {
+        const token = req.cookies.token;
+        const qs = { random: true };
+        const result = await MdlCategory.getCategories(token, qs);
+        if (result.statusCode === 200) {
+            res.cookie('category', result.body.data.name);
+        }
+        res.redirect('/question');
     }
 
     async indexPage(req, res) {

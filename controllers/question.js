@@ -7,6 +7,22 @@ class Question {
         const template = fs.readFileSync('public/views/question.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const question = await MdlQuestion.getRand(req.cookies.token, { random: true, category: req.cookies.category });
+        var random = Math.floor(Math.random() * 3);
+        var opc1, opc2, opc3;
+        if (random == 1) {
+            opc1 = question.body.data.option1;
+            opc2 = question.body.data.option2;
+            opc3 = question.body.data.optioncorrect;
+        } else if (random == 2) {
+            opc2 = question.body.data.option1;
+            opc3 = question.body.data.option2;
+            opc1 = question.body.data.optioncorrect;
+        } else {
+            opc3 = question.body.data.option1;
+            opc2 = question.body.data.option2;
+            opc1 = question.body.data.optioncorrect;
+        }
         let manage;
         if (req.cookies.admin == 'true') {
             manage = true;
@@ -14,13 +30,14 @@ class Question {
         const data = {
             nickname: req.cookies.nickname,
             admin: manage,
-            img: 'https://vignette.wikia.nocookie.net/es.pokemon/images/2/2c/Pok%C3%A9mon_Jukebox_icono.png/revision/latest?cb=20150624132304',
-            category: 'IA',
-            question: 'Wicht is better to program a MLP?',
-            opc1: 'Python',
-            opc2: 'Java',
-            opc3: 'C++',
+            img: `/img/${question.body.data.category}.png`,
+            category: question.body.data.category,
+            question: question.body.data.question,
+            opc1,
+            opc2,
+            opc3,
         };
+        res.cookie('question', question.body.data.id);
         const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
     }
