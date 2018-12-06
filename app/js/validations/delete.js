@@ -1,4 +1,4 @@
-windows.addEventListener('click', loadingDelete);
+window.addEventListener('click', loadingDelete);
 
 function loadingDelete() {
     try {
