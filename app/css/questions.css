@@ -6,9 +6,11 @@
 }
 
 .img-cat {
+    background: var(--complementary-color);
     max-width: 45px;
     max-height: 45px;
     margin: auto 10px;
+    padding: 3px;
 }
 
 .quest {
@@ -23,4 +25,42 @@
 
 .question p {
     margin: 10px;
+}
+
+.answer-res {
+    margin: 10px auto;
+    padding: 15px;
+    width: 90%;
+    display: none;
+}
+
+.answer-cor {
+    display: block;
+    background: rgba(0, 199, 33, 0.5);
+    border: 3px solid #00a043;
+}
+
+.answer-err {
+    display: block;
+    background: rgba(199, 0, 0, 0.5);
+    border: 3px solid #a00000;
+}
+
+.ans-flow{
+    display: none;
+    max-width: 250px;
+    margin: 10px auto;
+}
+
+.ans-flow-show {
+    display: block;
+}
+
+.games-modes{
+    display: inline-block;
+    margin: 30px auto;
+}
+
+.games-modes a{
+    margin: 0px 5px;
 }

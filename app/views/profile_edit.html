@@ -26,29 +26,31 @@
         <section class="base-container col-10">
             <div class="multiple-container">
                 <div class="col-2 div-img">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Antu_im-invisible-user.svg/512px-Antu_im-invisible-user.svg.png"
-                        class="user-img">
+                    <img src="{{{avatar}}}" alt="Profile image" class="user-img">
                 </div>
                 <div class="col-10">
                     <h1>{{nickname}}</h1>
                     <form action="" class="col-12">
+                        <div id="msg-alert-edit-profile" class="alert"></div>
                         <div class="div-field">
                             <label for="" class="col-1">Email</label>
-                            <input type="email" class="col-12 txt-input" placeholder="Write a new email" value="{{{email}}}">
+                            <input id="inp-new-email" type="email" class="col-12 txt-input" placeholder="Write a new email"
+                                value="{{{email}}}" data-origin-val="{{{email}}}">
                         </div>
                         <div class="div-field">
                             <a href="/profile/add_emails" class="col-1 btn-a">Add email</a>
                         </div>
                         <div class="div-field">
                             <label for="" class="col-1">Password</label>
-                            <input type="password" class="col-12 txt-input" placeholder="Write a new Password" value="{{{password}}}">
+                            <input id="inp-new-pass" type="password" class="col-12 txt-input" placeholder="Write a new Password"
+                                value="{{{password}}}" data-origin-val="{{{password}}}">
                         </div>
                         <div class="div-field">
                             <label for="" class="col-1">Avatar</label>
-                            <input type="file" name="" id="" class="col-12 btn-file">
+                            <input id="inp-file-avatar" type="file" name="file" class="col-12 btn-file" accept=".png, .jpg, .jpeg">
                         </div>
                         <div class="div-field">
-                            <button type="submit" class="btn-submit">Update</button>
+                            <button id="btn-edit-profile" type="button" class="btn-submit">Update</button>
                         </div>
                     </form>
                 </div>

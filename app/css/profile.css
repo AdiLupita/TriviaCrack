@@ -47,9 +47,7 @@
 }
 
 .form-add-friend {
-    margin: 20px 10px;
-    display: flex;
-    float: right;
+    padding: 15px 5px;
 }
 
 .email-list {

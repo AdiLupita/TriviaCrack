@@ -7,8 +7,6 @@
     margin-top: 7%;
     background-color: var(--cont-color);
     padding: 2%;
-    margin-left: 4%;
-    margin-right: 4%;
     box-shadow: 1px 1px 2px 0px var(--highlight-color);
     min-height: 70px;
 }
@@ -19,74 +17,35 @@ h3.msg-delete {
 
 /* line */
 
+.right{
+    text-align: right;
+}
+
 hr{
     align: left;
-    width: 90%;
+    width: 95%;
     margin: 1% 0 2%;
 }
 
 /* Menu administrador */
-span {
+span.menu-item {
     cursor: pointer;
     cursor: hand;
+    padding: 15px 5px 5px 3px;
 }
 
-span#hide-menu-1, .hide-menu-1 {
-    color: var(--main-color);
-    font-size: 20px;
-    height: 40px;
-    width: 40px;
-    padding: 5px;
-}
-
-span#hide-menu-1:hover{
-    color: #FFF;
-    background-color: var(--main-color);
-}
-
-.hide-menu {
-    display: none;
-}
-
-.menu-admin {
-    position: fixed;
+.filter {
     height: 100%;
-    width:  200px;
+    width: 300px;
+    margin: 0 15px;
     top: 0;
     left: 0;
-    z-index: 1;
     overflow-x: hidden;
     transition: 0.4s;
     -o-transition: 0.4s;
     box-sizing: border-box;
-}
-
-ul.menu-admin {
-    background-color: var(--main-color);
-    list-style: none;
-}
-
-ul.menu-admin li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-
-ul.menu-admin a {
-    display: block;
-    font-size: 120%;
-    color: #eee;
-    text-decoration: none;
-    padding: 8px 3px 8px 10px;
-}
-
-ul.menu-admin a:hover{
-    color: var(--main-color);
-    background-color: #F2B134;
-}
-
-.hide-mneu {
-    color: #000;
-    font-size: 1rem;
+    border: 1 solid;
+    padding-bottom: 15px;
 }
 
 /* tablas */
@@ -159,7 +118,7 @@ ul.menu-admin a:hover{
     display: inline;
 }
 
-.datagrid table tfoot li a {
+.datagrid table tfoot li button {
     text-decoration: none;
     display: inline-block;
     padding: 8px 8px;
@@ -172,12 +131,12 @@ ul.menu-admin a:hover{
     background-color: var(--main-color);
 }
 
-.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover, .btn-add:hover {
+.datagrid table tfoot li button.active, .datagrid table tfoot ul button:hover {
     text-decoration: none;
     border-color: #7D7D7D;
     color: #F5F5F5;
     background: none;
-    background-color:#8C8C8C;
+    background-color: var(--constrast-color);
 }
 
 /* form */
