@@ -42,6 +42,15 @@ class Question {
         res.send(html);
     }
 
+    async answerQuestion(req, res) {
+        const game = req.cookies.idgame;
+        const question = req.cookies.question;
+        const option = req.body.option;
+        const token = req.cookies.token;
+        const result = await MdlQuestion.addAnswer(game, question, option, token);
+        res.send(result);
+    }
+
     async addQuestionPage(req, res) {
         const template = fs.readFileSync('public/views/add_question.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();

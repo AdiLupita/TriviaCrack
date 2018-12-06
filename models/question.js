@@ -68,6 +68,20 @@ class Question {
             .catch((err) => { });
         return response;
     }
+
+    async addAnswer(game, question, option, token){
+        const header = {
+            token,
+        };
+        const body = {
+            question,
+            option
+        };
+        const url = `${process.env.HOST}/games/${game}/answers`;
+        const response = await API.postMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
 }
 
 module.exports = new Question();
