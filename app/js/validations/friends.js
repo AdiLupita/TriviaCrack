@@ -83,7 +83,25 @@ function apiRemoveFriend() {
 
 function apiPlay() {
     console.log(this.value);
-    console.log('play not implemented');
+    const header = {
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+    const data = {
+        player2: this.value,
+    };
+    const body = new URLSearchParams(data).toString()
+    API.post('/game/select_adversary', body, header)
+        .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+                window.location = res.url;
+            } else {
+                res.json()
+                    .then((r) => {
+                        msgErrVal('msg-alert-rm-friend', r.body.error);
+                    });
+            }
+        });
 }
 
 function validatePlayForm() {
