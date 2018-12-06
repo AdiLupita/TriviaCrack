@@ -1,2 +1,2 @@
 # TriviaCrack
- url: https://trivia-crack.herokuapp.com/
+ url: https://trivia-crack-mx.herokuapp.com/
