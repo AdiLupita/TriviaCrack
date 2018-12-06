@@ -1,13 +1,13 @@
 const API = require('./api');
 
 class Category {
-    async getCategories(token) {
+    async getCategories(token, params = {}) {
         const header = {
             token: token,
         };
-        const url = `${process.env.HOST}/questions`;
-        const response = await API.getMethod(url, header)
-            .catch((err) => { });
+        const url = `${process.env.HOST}/categories`;
+        const response = await API.getMethod(url, header, params)
+            .catch ((err) => { });
         return response;
     }
 
@@ -21,10 +21,10 @@ class Category {
         return response;
     }
 
-    async editQuestion(id, token,  req) {
+    async editQuestion(id, token, req) {
         const header = {
             token: token,
-          };
+        };
         const url = `${process.env.HOST}/questions/${id}`;
         const response = await API.patchMethod(url, req.body, header)
             .catch((err) => { });

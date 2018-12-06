@@ -1,0 +1,17 @@
+<tfoot>
+    <tr>
+        <td colspan="4">
+            <div id="paging">
+              <form action="" class="col-12">
+                <ul id="pagination">
+                    <li><button type="button"id="before" value="{{actual}}">&#60;&#60;</a></li>
+                    {{#pages}}
+                    <li><button type="button" value="{{page}}">{{page}}</a></li>
+                    {{/pages}}
+                    <li><button type="button" id="next" value="{{actual}}">&#62;&#62;</a></li>
+                </ul>
+              </form>
+            </div>
+        </td>
+    </tr>
+</tfoot>

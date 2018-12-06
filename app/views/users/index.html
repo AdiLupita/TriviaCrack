@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Trivia Crack</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- build:css -->
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/library.css">
@@ -15,8 +16,9 @@
     <link rel="shortcut icon" href="../../favicon.ico">
   <!-- endbuild -->
   <!-- build:js -->
-    <script src="../../js/menu-admin.js"></script>
-    <script src="../../js/principal.js"></script>   
+    <script src="../../js/filters.js"></script>
+    <script src="../../js/principal.js"></script>
+    <script src="../../js/pagination.js"></script>
   <!-- endbuild -->
 </head>
 
@@ -24,13 +26,19 @@
     {{>menu}}
     <main>
         <div class="container">
-            <div class="container container-menu">
-            {{>menu_admin}}
-            </div>
-            <section class="col-11 container-admin ">
-                <h1>Users</h1>
+            <section class="col-11 multiple-container container-admin ">
+                <div class="multiple-container col-12">
+                    <div class="col-11"><h1 id="title">Users</h1></div>
+                    <div class="right co-1">
+                        <span class="menu-item">
+                            <a id="hide-filter">
+                                <i class="material-icons">search</i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
                 <hr/>
-                <div class="datagrid">
+                <div id="content" class="datagrid col-12">
                     <table>
                         <thead>
                             <tr>
@@ -39,23 +47,7 @@
                                 <th>EMAIL</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4">
-                                    <div id="paging">
-                                        <ul>
-                                            <li><a href="#"><span>&#60;&#60;</span></a></li>
-                                            <li><a href="#" class="active"><span>1</span></a></li>
-                                            <li><a href="#"><span>2</span></a></li>
-                                            <li><a href="#"><span>3</span></a></li>
-                                            <li><a href="#"><span>4</span></a></li>
-                                            <li><a href="#"><span>5</span></a></li>
-                                            <li><a href="#"><span>&#62;&#62;</span></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
+                        {{>tfoot}}
                         <tbody>
                           {{#items}}
                             <tr>
@@ -66,6 +58,35 @@
                           {{/items}}
                         </tbody>
                     </table>
+                </div>
+                <div id="filter"class="filter hide-item col-2">
+                    <form>
+                        <div class="multiple-container quest">
+                            <label class="col-12">Nickname</label>
+                            <input type="text" name="" id="nickname" placeholder="nickname" class="col-12 txt-input">
+                        </div>
+                        <div class="multiple-container quest">
+                            <label class="col-12">Email</label>
+                            <input type="text" name="" id="email" placeholder="email" class="col-12 txt-input">
+                        </div>
+                        <div class="multiple-container quest">
+                            <label class="col-12">Rol User</label>
+                            <select name="" id="admin" class="col-12 select-input">
+                                <option value="-1">Select rol user</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="multiple-container quest">
+                            <label class="col-12">Verified</label>
+                            <select name="" id="verified" class="col-12 select-input">
+                                <option value="-1">Select verified</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <button id="search-users" type="button" class="btn-submit">Search</button>
+                    </form>
                 </div>
             </section>
         </div>

@@ -2,11 +2,12 @@ const fetch = require('node-fetch');
 const request = require('request-promise');
 
 class API {
-    async getMethod(url = '', header = {}) {
+    async getMethod(url = '', header = {}, params = {}) {
         const options = {
             method: 'GET',
             url,
             headers: { ...header },
+            qs: { ...params },
             simple: false,
         };
         let result = {};
@@ -31,8 +32,19 @@ class API {
         return result;
     }
 
-    async patchMethod(url, body = {}, headers = {}) {
-
+    async patchMethod(url, body = {}, header = {}) {
+        const options = {
+            method: 'PATCH',
+            url,
+            headers: { ...header },
+            form: { ...body },
+            simple: false,
+        };
+        let result = {};
+        await request(options, (error, response, body) => {
+            result = { statusCode: response.statusCode, body: JSON.parse(body || '{}') };
+        });
+        return result;
     }
 
     async delMethod(url, body = {}, header = {}) {

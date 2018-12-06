@@ -7,7 +7,6 @@
     <title>Trivia Crack</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- build:css -->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link rel="stylesheet" href="../../css/normalize.css">
       <link rel="stylesheet" href="../../css/library.css">
       <link rel="stylesheet" href="../../css/grid.css">
@@ -18,7 +17,6 @@
       <link rel="shortcut icon" href="../../favicon.ico">
     <!-- endbuild -->
     <!-- build:js -->
-      <script src="../../js/menu-admin.js"></script>
       <script src="../../js/principal"></script>
     <!-- endbuild -->
 </head>
@@ -26,13 +24,11 @@
 <body>
   {{>menu}}
   <main>
-          <div class="container container-menu">
-            {{>menu_admin}}
-          </div>
             <section class="multiple-container container-admin col-11">
               {{#data}}
                       <div class="box col-9 cont-info">
                           <h4 class="txt-nickname">{{question}}</h4>
+                          <h1 id="id-approved" class="hide-item">{{id}}</h1>
                           <p class="txt-email">Option correct: {{optioncorrect}}</p>
                           <p class="txt-email">Option 1: {{option1}}</p>
                           <p class="txt-email">Option 2: {{option2}}</p>
@@ -48,7 +44,12 @@
                           <a href="/questions/edit/{{id}}" class="btn-a">
                               <i class="material-icons">create</i>
                           </a>
-                      </div>                      
+                          {{^approved}}
+                          <a id="approved-question" class="btn-a">
+                              <i class="material-icons">done</i>
+                          </a>
+                          {{/approved}}
+                      </div>
               {{/data}}
             </section>
         </div>

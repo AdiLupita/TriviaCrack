@@ -10,6 +10,17 @@ class API {
         });
     }
 
+    static patch(url='', body={}, header = {}){
+        return fetch(url, {
+            method: 'PATCH',
+            rejectUnauthorized: false,
+            headers: {
+                ...header,
+            },
+            body,
+        });
+    }
+
     static get(url = '', header = {}) {
         return fetch(url, {
             method: 'GET',

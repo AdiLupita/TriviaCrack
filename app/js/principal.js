@@ -1,11 +1,26 @@
-const ITME_HIDE_HEADER = 3000;
+const TIME_HIDE_HEADER = 3000;
+let hideHead;
 
-function show() {
-    const menu = document.getElementById('menu');
-    menu.classList.toggle('hide');
+window.addEventListener('scroll', headerScroll);
+window.addEventListener('load', loadingPrincipal);
+window.addEventListener('reload', changePictureWelcome);
+
+function loadingPrincipal() {
+    try {
+        const btn = document.getElementById('drop-menu');
+        btn.addEventListener('click', show);
+        changePictureWelcome();
+    } catch (error) {
+
+    }
 }
 
-let hideHead;
+function show() {
+    window.clearTimeout(hideHead);
+    const element = document.getElementById('menu');
+    element.classList.toggle('hide');
+}
+
 function headerScroll() {
     try {
         document.getElementById('header').classList.remove('no-visible');
@@ -28,7 +43,7 @@ function headerScroll() {
             menu.classList.add('scroller');
             menu.parentNode.classList.remove('menu');
             itemMenuScroll(true);
-            hideHead = setTimeout(hideHeader, ITME_HIDE_HEADER);
+            hideHead = setTimeout(hideHeader, TIME_HIDE_HEADER);
         }
     } catch (error) {
 
@@ -62,17 +77,3 @@ function changePictureWelcome() {
         picture.src = "img/logo.png";
     }
 }
-
-function loadingPrincipal() {
-    try {
-        const btn = document.getElementById('drop-menu');
-        btn.addEventListener('click', show);
-        changePictureWelcome();
-    } catch (error) {
-
-    }
-}
-
-
-window.addEventListener('scroll', headerScroll);
-window.addEventListener('load', loadingPrincipal);
