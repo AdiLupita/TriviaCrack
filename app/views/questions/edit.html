@@ -18,7 +18,6 @@
       <link rel="shortcut icon" href="../../favicon.ico">
     <!-- endbuild -->
     <!-- build:js -->
-      <script src="../../js/menu-admin.js"></script>
       <script src="../../js/principal"></script>
     <!-- endbuild -->
 </head>
@@ -26,9 +25,6 @@
 <body>
     {{>menu}}
     <main>
-      <div class="container container-menu">
-        {{>menu_admin}}
-      </div>
       {{#data}}
       <section class="base-container col-12">
           <div class="multiple-container">
@@ -71,14 +67,7 @@
       </section>
       {{/data}}
     </main>
-    <footer>
-        <nav>
-            <ul class="nav-sub-menu">
-                <li><a href="" class="menu-item">Contact us</a></li>
-                <li><a href="" class="menu-item">Github</a></li>
-            </ul>
-        </nav>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>

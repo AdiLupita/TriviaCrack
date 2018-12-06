@@ -33,6 +33,16 @@ class Game {
             .catch((err) => { });
         return response;
     }
+
+    async updateGame(id, body, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/games/${id}`;
+        const response = await API.patchMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
 }
 
 module.exports = new Game();

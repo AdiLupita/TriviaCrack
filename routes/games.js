@@ -12,5 +12,7 @@ router.get('/game/rand_player', CtrlGame.createGameRandom);
 
 router.get('/games', CtrlGame.indexPage);
 router.get('/games/:id', CtrlGame.showPage);
+router.get('/games/edit/:id', CtrlGame.editPage);
+router.patch('/games/edit/:id', CtrlGame.editGame);
 
 module.exports = router;
