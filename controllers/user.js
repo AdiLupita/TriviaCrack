@@ -153,33 +153,38 @@ class User {
     async removeEmail(req, res) {
         const result = await MdlUser.removeEmails(req.cookies.nickname, req.body.email, req.cookies.token);
         res.status(result.statusCode).send(result);
-
     }
 
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/users/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
+        const tfoot = fs.readFileSync('public/partials/tfoot.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
         if (req.cookies.admin == 'true') {
             manage = true;
         }
-        let page = 1;
-        if (req.query !== undefined && req.query.page !== undefined) {
-            page = req.query.page;
+        const result = await MdlUser.getAll(req.cookies.token, req.query);
+        if(result.body.pages == undefined){
+            res.redirect('/users');
         }
-        const result = await MdlUser.getAll(req.cookies.token, page);
         if (result.statusCode !== 200) {
             res.status(result.statusCode);
             res.send(result);
+        }
+        let page = 1;
+        if (req.query.page) {
+            page = req.query.page;
         }
         const data = {
             nickname: req.cookies.nickname,
             admin: manage,
             items: result.body.data,
+            pages: [{ page: page}],
+            actual: page,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
+        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, tfoot });
         res.send(html);
     }
 
@@ -195,7 +200,7 @@ class User {
         }
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
-            nickname: profile.body.data.nickname,
+            nickname: req.cookies.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             personal: true,

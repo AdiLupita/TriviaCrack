@@ -122,12 +122,12 @@ class User {
         return response;
     }
 
-    async getAll(token, page) {
+    async getAll(token, params) {
         const header = {
             token: token,
         };
-        const url = `${process.env.HOST}/users?page=${page}`;
-        const response = await API.getMethod(url, header)
+        const url = `${process.env.HOST}/users`;
+        const response = await API.getMethod(url, header, params)
             .catch((err) => { });
         return response;
     }
