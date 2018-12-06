@@ -8,6 +8,7 @@ router.post('/game/select_adversary', CtrlGame.createGame);
 router.get('/game/roulette', CtrlGame.roulettePage);
 router.get('/game/finish', CtrlGame.gameFinishPage);
 router.get('/game/rand_category', CtrlGame.getRandomCategory);
+router.get('/game/rand_player', CtrlGame.createGameRandom);
 
 router.get('/games', CtrlGame.indexPage);
 

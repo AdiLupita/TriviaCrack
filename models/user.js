@@ -28,13 +28,13 @@ class User {
         return response;
     }
 
-    async getProfile(nickname, token) {
+    async getProfile(nickname, token, params) {
         const path = new RegExp('https:\/\/s3\.amazonaws\.com')
         const header = {
             token: token,
         };
         const url = `${process.env.HOST}/users/${nickname}`;
-        const response = await API.getMethod(url, header)
+        const response = await API.getMethod(url, header, params)
             .catch((err) => { });
         if (response.body.data.avatar === 'default.png') {
             response.body.data.avatar = `/img/default.png`;
