@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Mustache = require('mustache');
+const { MdlUser } = require('../models');
 
 class Game {
     async selectAdversaryPage(req, res) {
@@ -7,6 +8,8 @@ class Game {
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
         const friends = fs.readFileSync('public/partials/friend_list.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const friendsList = await MdlUser.getFriends(req.cookies.nickname, req.cookies.token);
+        console.log(friendsList);
         let manage;
         if (req.cookies.admin == 'true') {
             manage = true;
@@ -15,21 +18,7 @@ class Game {
             nickname: req.cookies.nickname,
             admin: manage,
             adversary: true,
-            friends: [
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                },
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                },
-                {
-                    img: 'https://www.enriquedans.com/wp-content/uploads/2018/06/GitHub-Octocat.jpg',
-                    nickname: 'Asasdas_asdad',
-                }
-            ]
-
+            friends: friendsList.body.data,
         };
         const html = Mustache.to_html(template, data, { menu, footer, friends });
         res.send(html);
