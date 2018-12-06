@@ -52,7 +52,6 @@ class Game {
         }
     }
 
-<<<<<<< HEAD
     async getRandomCategory(req, res) {
         const token = req.cookies.token;
         const qs = { random: true };
@@ -63,7 +62,6 @@ class Game {
         res.redirect('/question');
     }
 
-=======
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/games/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
@@ -96,7 +94,6 @@ class Game {
         const html = Mustache.to_html(template, data, { menu, menu_admin, footer, tfoot });
         res.send(html);
     }
->>>>>>> eb7751328aeabe0230de995efeda6ae4e16c7e0e
 }
 
 module.exports = new Game();
