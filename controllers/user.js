@@ -205,8 +205,8 @@ class User {
     async showPage(req, res) {
         const template = fs.readFileSync('public/views/users/show.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
+        const email_list = fs.readFileSync('public/partials/email_list.mst').toString();
         const delete_modal = fs.readFileSync('public/partials/delete_modal.mst').toString();
         let manage;
         if (req.cookies.admin == 'true') {
@@ -215,31 +215,21 @@ class User {
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
             nickname: req.cookies.nickname,
+            nickname_user: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
             personal: true,
             admin: manage,
             route: 'users',
-            emails: [
-                {
-                    email: 'Asasdas1@asdad.com',
-                },
-                {
-                    email: 'Asasdas2@asdad.com',
-                },
-                {
-                    email: 'Asasdas3@asdad.com',
-                },
-            ]
+            emails: []
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, delete_modal });
+        const html = Mustache.to_html(template, data, { menu, footer, delete_modal, email_list });
         res.send(html);
     }
 
     async editPage(req, res) {
         const template = fs.readFileSync('public/views/users/edit.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
         if (req.cookies.admin == 'true') {
@@ -247,23 +237,26 @@ class User {
         }
         const profile = await MdlUser.getProfile(req.params.nickname, req.cookies.token);
         const data = {
-            nickname: profile.body.data.nickname,
+            nickaname: req.params.nickname,
+            nickname_user: profile.body.data.nickname,
             email: profile.body.data.email,
             score: profile.body.data.score,
-            personal: true,
+            password: 'default',
+            avatar: profile.body.data.avatar,
             admin: manage,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer });
+        const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
     }
 
     async editUser(req, res) {
-        const nickname = req.body.nickname;
-        const result = await MdlUser.editUser(req);
-        if (result.statusCode !== 200) {
-            res.status(result.statusCode);
-            res.send(result);
-        }
+      console.log(req.params.nickname);
+      const result = await MdlUser.updateUser(req.params.nickname, req.body, req.cookies.token);
+      if (result.statusCode === 204) {
+          res.status(204).send();
+      } else {
+          res.status(result.statusCode).send(result);
+      }
     }
 
     async deleteUser(req, res) {

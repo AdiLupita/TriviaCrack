@@ -9,7 +9,6 @@ function loadingPrincipal() {
     try {
         const btn = document.getElementById('drop-menu');
         btn.addEventListener('click', show);
-
         changePictureWelcome();
     } catch (error) {
 
