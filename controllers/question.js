@@ -144,7 +144,6 @@ class Question {
     }
 
     async editQuestion(req, res) {
-        console.log(req.body);
         const result = await MdlQuestion.updateQuestion(req.params.id, req.body, req.cookies.token);
         if (result.statusCode === 204) {
             res.status(204).send();
