@@ -69,7 +69,7 @@ class User {
         res.send(html);
     }
 
-    async addFriend(req, res){
+    async addFriend(req, res) {
         const result = await MdlUser.addFriend(req.cookies.nickname, req.body.friend, req.cookies.token);
         if (result.statusCode === 200) {
             const template = fs.readFileSync('public/partials/friend.mst').toString();
@@ -85,6 +85,11 @@ class User {
         } else {
             res.status(result.statusCode).send(result);
         }
+    }
+
+    async removeFriend(req, res) {
+        const result = await MdlUser.removeFriend(req.cookies.nickname, req.body.friend, req.cookies.token);
+        res.status(result.statusCode).send(result);
     }
 
     async profileEditPage(req, res) {
@@ -105,6 +110,15 @@ class User {
         };
         const html = Mustache.to_html(template, data, { menu, footer });
         res.send(html);
+    }
+
+    async profileUpdate(req, res) {
+        const result = await MdlUser.updateUser(req.cookies.nickname, req.body, req.cookies.token);
+        if (result.statusCode === 204) {
+            res.status(204).send();
+        } else {
+            res.status(result.statusCode).send(result);
+        }
     }
 
     async addEmailsPage(req, res) {

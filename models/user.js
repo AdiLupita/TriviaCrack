@@ -114,15 +114,37 @@ class User {
         const url = `${process.env.HOST}/users/${nickname}/friends`;
         const response = await API.postMethod(url, body, header)
             .catch((err) => { });
-        if (response.body.data.avatar === 'default.png') {
-            response.body.data.avatar = `/img/default.png`;
-        } else if (!path.test(response.body.data.avatar)) {
-            response.body.data.avatar = `${process.env.HOST}/uploads/${response.body.data.avatar}`;
+        if (response.statusCode === 200) {
+            if (response.body.data.avatar === 'default.png') {
+                response.body.data.avatar = `/img/default.png`;
+            } else if (!path.test(response.body.data.avatar)) {
+                response.body.data.avatar = `${process.env.HOST}/uploads/${response.body.data.avatar}`;
+            }
         }
         return response;
     }
 
-    async getAll(token, params) {
+    async removeFriend(nickname, friend, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}/friends/${friend}`;
+        const response = await API.delMethod(url, friend, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async updateUser(nickname, body, token) {
+        const header = {
+            token: token,
+        };
+        const url = `${process.env.HOST}/users/${nickname}`;
+        const response = await API.patchMethod(url, body, header)
+            .catch((err) => { });
+        return response;
+    }
+
+    async getAll(token, page) {
         const header = {
             token: token,
         };
