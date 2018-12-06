@@ -45,6 +45,7 @@ span.menu-item {
     -o-transition: 0.4s;
     box-sizing: border-box;
     border: 1 solid;
+    padding-bottom: 15px;
 }
 
 /* tablas */
@@ -117,7 +118,7 @@ span.menu-item {
     display: inline;
 }
 
-.datagrid table tfoot li a {
+.datagrid table tfoot li button {
     text-decoration: none;
     display: inline-block;
     padding: 8px 8px;
@@ -130,12 +131,12 @@ span.menu-item {
     background-color: var(--main-color);
 }
 
-.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover, .btn-add:hover {
+.datagrid table tfoot li button.active, .datagrid table tfoot ul button:hover {
     text-decoration: none;
     border-color: #7D7D7D;
     color: #F5F5F5;
     background: none;
-    background-color:#8C8C8C;
+    background-color: var(--constrast-color);
 }
 
 /* form */

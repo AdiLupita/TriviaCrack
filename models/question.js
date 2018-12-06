@@ -1,12 +1,12 @@
 const API = require('./api');
 
 class Question {
-    async getAll(token, page) {
+    async getAll(token, params) {
         const header = {
             token: token,
         };
-        const url = `${process.env.HOST}/questions?page=${page}`;
-        const response = await API.getMethod(url, header)
+        const url = `${process.env.HOST}/questions`;
+        const response = await API.getMethod(url, header, params)
             .catch((err) => { });
         return response;
     }
@@ -50,7 +50,7 @@ class Question {
             .catch((err) => { });
         return response;
     }
-    
+
     async addQuestion(category, question, option1, option2, optioncorrect, userid, token) {
         const header = {
             token,

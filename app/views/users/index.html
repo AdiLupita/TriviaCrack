@@ -18,6 +18,7 @@
   <!-- build:js -->
     <script src="../../js/filters.js"></script>
     <script src="../../js/principal.js"></script>
+    <script src="../../js/pagination.js"></script>
   <!-- endbuild -->
 </head>
 
@@ -25,11 +26,9 @@
     {{>menu}}
     <main>
         <div class="container">
-            <div class="container container-menu">
-            </div>
             <section class="col-11 multiple-container container-admin ">
                 <div class="multiple-container col-12">
-                    <div class="col-11"><h1>Users</h1></div>
+                    <div class="col-11"><h1 id="title">Users</h1></div>
                     <div class="right co-1">
                         <span class="menu-item">
                             <a id="hide-filter">
@@ -48,23 +47,7 @@
                                 <th>EMAIL</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4">
-                                    <div id="paging">
-                                        <ul>
-                                            <li><a href="#"><span>&#60;&#60;</span></a></li>
-                                            <li><a href="#" class="active"><span>1</span></a></li>
-                                            <li><a href="#"><span>2</span></a></li>
-                                            <li><a href="#"><span>3</span></a></li>
-                                            <li><a href="#"><span>4</span></a></li>
-                                            <li><a href="#"><span>5</span></a></li>
-                                            <li><a href="#"><span>&#62;&#62;</span></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
+                        {{>tfoot}}
                         <tbody>
                           {{#items}}
                             <tr>
