@@ -63,7 +63,6 @@ class Question {
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/questions/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const tfoot = fs.readFileSync('public/partials/tfoot.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         let manage;
@@ -71,6 +70,7 @@ class Question {
             manage = true;
         }
         const result = await MdlQuestion.getAll(req.cookies.token, req.query);
+        const categories = await MdlCategory.getCategories(req.cookies.token);
         if(result.body.pages == undefined){
             res.redirect('/users');
         }
@@ -86,10 +86,11 @@ class Question {
             nickname: req.cookies.nickname,
             admin: manage,
             pages: [{ page: page}],
-            items: result.body.data,
+            items: result.body.data,            
+            categories: categories.body.data,
             actual: page,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, tfoot });
+        const html = Mustache.to_html(template, data, { menu, footer, tfoot });
         res.send(html);
     }
 

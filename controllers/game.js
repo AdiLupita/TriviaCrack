@@ -65,7 +65,6 @@ class Game {
     async indexPage(req, res) {
         const template = fs.readFileSync('public/views/games/index.mst').toString();
         const menu = fs.readFileSync('public/partials/menu.mst').toString();
-        const menu_admin = fs.readFileSync('public/partials/menu_admin.mst').toString();
         const footer = fs.readFileSync('public/partials/footer.mst').toString();
         const tfoot = fs.readFileSync('public/partials/tfoot.mst').toString();
         let manage;
@@ -91,7 +90,7 @@ class Game {
             actual: page,
             items: result.body.data,
         };
-        const html = Mustache.to_html(template, data, { menu, menu_admin, footer, tfoot });
+        const html = Mustache.to_html(template, data, { menu, footer, tfoot });
         res.send(html);
     }
 }
